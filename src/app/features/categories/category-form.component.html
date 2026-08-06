@@ -1,0 +1,47 @@
+<app-modal [title]="editing ? 'Edit Category' : 'New Category'" (close)="close.emit()">
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label class="field">
+      <span class="field-label">Name</span>
+      <input type="text" formControlName="name" placeholder="e.g. Travel Bags" />
+      @if (form.get('name')?.invalid && form.get('name')?.touched) {
+        <span class="field-error">Category name is required.</span>
+      }
+    </label>
+
+    <label class="field">
+      <span class="field-label">Slug <span class="text-faint">(optional — auto-generated from name)</span></span>
+      <input type="text" formControlName="slug" placeholder="travel-bags" />
+    </label>
+
+    <label class="field">
+      <span class="field-label">Description</span>
+      <textarea formControlName="description" rows="3"></textarea>
+    </label>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Sort Order</span>
+        <input type="number" formControlName="sort_order" />
+      </label>
+
+      <label class="field">
+        <span class="field-label">Status</span>
+        <select formControlName="status">
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </label>
+    </div>
+
+    @if (errorMessage) {
+      <div class="alert">{{ errorMessage }}</div>
+    }
+
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" (click)="close.emit()">Cancel</button>
+      <button type="submit" class="btn-primary" [disabled]="saving">
+        {{ saving ? 'Saving…' : editing ? 'Save Changes' : 'Create Category' }}
+      </button>
+    </div>
+  </form>
+</app-modal>

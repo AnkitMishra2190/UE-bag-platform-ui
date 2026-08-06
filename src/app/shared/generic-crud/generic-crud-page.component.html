@@ -1,0 +1,110 @@
+<div class="page-header">
+  <div>
+    <h1>{{ config.title }}</h1>
+    <p class="text-muted">{{ config.description }}</p>
+  </div>
+  <button class="btn-primary" (click)="openCreate()">+ {{ config.createLabel }}</button>
+</div>
+
+<div class="toolbar">
+  <input type="search" placeholder="Search…" [(ngModel)]="search" (ngModelChange)="onSearchChange()" class="search-input" />
+  <select [(ngModel)]="statusFilter" (ngModelChange)="onSearchChange()">
+    <option value="">All statuses</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+  </select>
+</div>
+
+<div class="table-card">
+  @if (loading()) {
+    <div class="empty-state">Loading…</div>
+  } @else if (items().length === 0) {
+    <div class="empty-state">Nothing here yet.</div>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          @for (col of config.columns; track col.key) {
+            <th>{{ col.label }}</th>
+          }
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items(); track item.id) {
+          <tr>
+            <td><strong>{{ item.name }}</strong></td>
+            @for (col of config.columns; track col.key) {
+              <td [class.mono]="col.mono">{{ item[col.key] }}</td>
+            }
+            <td>
+              <button
+                class="status-badge"
+                [class.status-active]="item.status === 'active'"
+                [class.status-inactive]="item.status === 'inactive'"
+                (click)="toggleStatus(item)"
+                title="Click to toggle"
+              >
+                {{ item.status }}
+              </button>
+            </td>
+            <td class="actions-cell">
+              <button class="btn-ghost btn-sm" (click)="openEdit(item)">Edit</button>
+              <button class="btn-danger-text" (click)="remove(item)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <span class="text-muted" style="font-size: var(--fs-xs);">{{ total() }} total</span>
+      <div class="pagination-controls">
+        <button class="btn-ghost btn-sm" [disabled]="page() <= 1" (click)="goToPage(page() - 1)">Prev</button>
+        <span class="text-muted" style="font-size: var(--fs-xs);">Page {{ page() }} of {{ totalPages }}</span>
+        <button class="btn-ghost btn-sm" [disabled]="page() >= totalPages" (click)="goToPage(page() + 1)">Next</button>
+      </div>
+    </div>
+  }
+</div>
+
+@if (showForm) {
+  <app-modal [title]="editingItem ? 'Edit ' + config.title : config.createLabel" (close)="closeForm()">
+    <label class="field">
+      <span class="field-label">Name</span>
+      <input type="text" [(ngModel)]="formValue['name']" />
+    </label>
+
+    @for (f of config.fields; track f.key) {
+      <label class="field">
+        <span class="field-label">{{ f.label }}</span>
+        @if (f.type === 'textarea') {
+          <textarea [(ngModel)]="formValue[f.key]" rows="3"></textarea>
+        } @else {
+          <input [type]="f.type === 'color' ? 'color' : f.type" [(ngModel)]="formValue[f.key]" />
+        }
+      </label>
+    }
+
+    <label class="field">
+      <span class="field-label">Status</span>
+      <select [(ngModel)]="formValue['status']">
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </label>
+
+    @if (errorMessage) {
+      <div class="alert">{{ errorMessage }}</div>
+    }
+
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" (click)="closeForm()">Cancel</button>
+      <button type="button" class="btn-primary" [disabled]="saving" (click)="submit()">
+        {{ saving ? 'Saving…' : editingItem ? 'Save Changes' : 'Create' }}
+      </button>
+    </div>
+  </app-modal>
+}

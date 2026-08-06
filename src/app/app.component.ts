@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +7,4 @@ import { ApiService } from './api.service';
   imports: [RouterOutlet],
   template: `<router-outlet />`,
 })
-export class AppComponent {
-  private api = inject(ApiService);
-
-  ngOnInit() {
-    this.api.getTest().subscribe({
-      next: (res) => console.log(res),
-      error: (err) => console.error(err)
-    });
-  }
-}
+export class AppComponent {}

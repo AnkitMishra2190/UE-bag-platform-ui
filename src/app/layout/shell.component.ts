@@ -28,6 +28,48 @@ export class ShellComponent {
       label: 'Overview',
       items: [{ label: 'Dashboard', path: '/dashboard' }],
     },
+    {
+      label: 'Catalog',
+      items: [
+        { label: 'Categories', path: '/categories' },
+        { label: 'Products', path: '/products' },
+        { label: 'Colors', path: '/colors' },
+        { label: 'Materials', path: '/materials' },
+        { label: 'Sizes', path: '/sizes' },
+        { label: 'Tags', path: '/tags' },
+      ],
+    },
+    {
+      label: 'CRM',
+      items: [
+        { label: 'Customers', path: '/customers' },
+        { label: 'Companies', path: '/customer-companies' },
+      ],
+    },
+    {
+      label: 'Sales',
+      items: [
+        { label: 'Inquiries', path: '/inquiries' },
+        { label: 'Quotations', path: '/quotations' },
+        { label: 'Orders', path: '/orders' },
+      ],
+    },
+    {
+      label: 'Manufacturing',
+      items: [
+        { label: 'Jobs', path: '/manufacturing-jobs' },
+        { label: 'Production Stages', path: '/production-stages' },
+      ],
+    },
+    {
+      label: 'Administration',
+      items: [
+        { label: 'Users', path: '/users' },
+        { label: 'Roles', path: '/roles' },
+        { label: 'Permissions', path: '/permissions' },
+        { label: 'Departments', path: '/departments' },
+      ],
+    },
   ];
 
   constructor(public auth: AuthService) {}
