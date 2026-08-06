@@ -1,0 +1,89 @@
+// ============================================
+// Design Tokens — Unick Enterprises Admin
+// ============================================
+// Grounded in the subject: bag manufacturing.
+// Ink-navy structure, copper/rivet accent (not generic SaaS blue),
+// stitch-line (dashed) motif for dividers/active states.
+
+:root {
+  // --- Color: structure ---
+  --color-ink: #161b22;          // sidebar, dark surfaces, primary text
+  --color-ink-soft: #2a313c;     // secondary dark surface (hover states on dark)
+  --color-paper: #f3f4f6;        // app background — cool neutral, not cream
+  --color-surface: #ffffff;      // cards, tables, panels
+  --color-border: #e2e4e9;       // hairline borders
+  --color-border-strong: #c9ccd3;
+
+  // --- Color: text ---
+  --color-text: #161b22;
+  --color-text-muted: #5b6472;
+  --color-text-faint: #8991a0;
+  --color-text-on-ink: #eef0f3;
+  --color-text-on-ink-muted: #9aa3b2;
+
+  // --- Color: accent (copper — rivets/stitching) ---
+  --color-accent: #b5502c;
+  --color-accent-hover: #9c4324;
+  --color-accent-soft: #f5e6df;   // accent-tinted backgrounds (badges, highlights)
+
+  // --- Color: semantic ---
+  --color-success: #2f7d5c;
+  --color-success-soft: #e3f2ea;
+  --color-warning: #b8860b;
+  --color-warning-soft: #faf1dc;
+  --color-danger: #b3392f;
+  --color-danger-soft: #fbe8e6;
+  --color-info: #2c5c8a;
+  --color-info-soft: #e5eef6;
+
+  // --- Typography ---
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+
+  --fs-xs: 0.75rem;    // 12px — captions, meta
+  --fs-sm: 0.8125rem;  // 13px — table text, dense UI
+  --fs-base: 0.9375rem;// 15px — body
+  --fs-md: 1.0625rem;  // 17px — card titles
+  --fs-lg: 1.375rem;   // 22px — section headers
+  --fs-xl: 1.875rem;   // 30px — page titles
+  --fs-2xl: 2.5rem;    // 40px — dashboard hero numbers
+
+  // --- Spacing (4px base scale) ---
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+
+  // --- Shape ---
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  // --- Shadow ---
+  --shadow-sm: 0 1px 2px rgba(22, 27, 34, 0.06);
+  --shadow-md: 0 4px 12px rgba(22, 27, 34, 0.08);
+  --shadow-lg: 0 12px 32px rgba(22, 27, 34, 0.14);
+
+  // --- Layout ---
+  --sidebar-width: 248px;
+  --topbar-height: 60px;
+}
+
+// ============================================
+// Signature motif: stitch-line divider
+// A dashed rule referencing manufacturing stitching.
+// Used sparingly — section boundaries, active nav state.
+// ============================================
+@mixin stitch-line($color: var(--color-border-strong)) {
+  border: none;
+  border-top: 1.5px dashed $color;
+}
+
+.stitch-divider {
+  @include stitch-line;
+  margin: var(--space-5) 0;
+}

@@ -1,0 +1,40 @@
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark">UE</span>
+      <span class="brand-name">Unick Enterprises</span>
+    </div>
+
+    <nav>
+      @for (group of navGroups; track group.label) {
+        <div class="nav-group">
+          <span class="nav-group-label">{{ group.label }}</span>
+          @for (item of group.items; track item.path) {
+            <a
+              [routerLink]="item.path"
+              routerLinkActive="active"
+              class="nav-item"
+            >
+              {{ item.label }}
+            </a>
+          }
+        </div>
+      }
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div></div>
+      <div class="topbar-user">
+        <span class="user-name">{{ auth.user()?.name }}</span>
+        <span class="user-role">{{ auth.user()?.role_name }}</span>
+        <button class="btn-ghost" (click)="auth.logout()">Sign out</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+</div>
