@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
+import { ThemeService } from '../core/services/theme.service';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
+import { WhatsAppButtonComponent } from './whatsapp-button/whatsapp-button.component';
 
 interface NavItem {
   label: string;
@@ -16,7 +21,10 @@ interface NavGroup {
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet, HeaderComponent,
+    FooterComponent,
+    ScrollToTopComponent,
+    WhatsAppButtonComponent,],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
 })
@@ -72,5 +80,5 @@ export class ShellComponent {
     },
   ];
 
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, public theme: ThemeService) {}
 }

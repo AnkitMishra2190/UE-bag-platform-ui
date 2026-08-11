@@ -1,0 +1,18 @@
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+    <p class="text-center text-sm font-semibold tracking-wide uppercase text-gray-400 dark:text-gray-500 mb-8">
+    Certified &amp; Compliant
+    </p>
+    <div class="flex flex-wrap justify-center gap-6">
+    @for (cert of certifications; track cert.name) {
+        <div
+        class="flex items-center gap-3 rounded-xl px-5 py-3 bg-white dark:bg-gray-800 ring-1 ring-gray-900/5 dark:ring-white/10 shadow-sm"
+        >
+        <mat-icon class="text-brand-600 dark:text-brand-400">verified_user</mat-icon>
+        <div>
+            <p class="text-sm font-semibold text-gray-900 dark:text-white">{{ cert.name }}</p>
+            <p class="text-xs text-gray-400 dark:text-gray-500">{{ cert.issuer }}</p>
+        </div>
+        </div>
+    }
+    </div>
+</section>

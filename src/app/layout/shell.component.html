@@ -27,6 +27,25 @@
     <header class="topbar">
       <div></div>
       <div class="topbar-user">
+        <button
+          class="theme-toggle"
+          (click)="theme.toggle()"
+          [attr.aria-label]="theme.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          title="Toggle day/night mode"
+        >
+          @if (theme.theme() === 'dark') {
+            <!-- sun icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+          } @else {
+            <!-- moon icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          }
+        </button>
         <span class="user-name">{{ auth.user()?.name }}</span>
         <span class="user-role">{{ auth.user()?.role_name }}</span>
         <button class="btn-ghost" (click)="auth.logout()">Sign out</button>
@@ -34,7 +53,19 @@
     </header>
 
     <main class="content">
-      <router-outlet />
+      <!-- <router-outlet /> -->
+      <div class="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-200">
+        <app-header></app-header>
+
+        <main class="flex-1">
+          <router-outlet></router-outlet>
+        </main>
+
+        <app-footer></app-footer>
+        <app-scroll-to-top></app-scroll-to-top>
+        <app-whatsapp-button></app-whatsapp-button>
+      </div>
+
     </main>
   </div>
 </div>

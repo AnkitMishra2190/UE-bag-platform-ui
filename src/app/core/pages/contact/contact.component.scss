@@ -1,0 +1,8 @@
+:host {
+  display: block;
+}
+
+/* Prevent Google Maps iframe from creating unexpected inline spacing */
+iframe {
+  display: block;
+}

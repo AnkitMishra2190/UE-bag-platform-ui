@@ -1,0 +1,114 @@
+<footer class="bg-gray-900 text-gray-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+    <!-- Brand + newsletter -->
+    <div class="lg:col-span-2">
+      <span class="text-xl font-bold tracking-tight text-white">
+        Corporate<span class="text-brand-400">Site</span>
+      </span>
+      <p class="mt-4 text-sm text-gray-400 max-w-sm">
+        Placeholder company description — replace via Admin &gt; Website Settings
+        once that module is built.
+      </p>
+
+      <form
+        [formGroup]="newsletterForm"
+        (ngSubmit)="onSubscribe()"
+        class="mt-6 flex items-start gap-2 max-w-sm"
+      >
+        <mat-form-field appearance="outline" class="flex-1" subscriptSizing="dynamic">
+          <mat-label>Your email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="you@example.com" />
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="submit" class="mt-1">Subscribe</button>
+      </form>
+    </div>
+
+    <!-- Quick links -->
+    <div>
+      <h3 class="text-sm font-semibold text-white uppercase tracking-wide">Quick Links</h3>
+      <ul class="mt-4 space-y-2 list-none">
+        @for (link of navData.footerQuickLinks; track link.path) {
+          <li class="group relative">
+            @if (link.icon) {
+              <mat-icon
+                class="
+                  !m-0
+                  !h-5
+                  !w-5
+                  !text-[20px]
+                  shrink-0
+                "
+                aria-hidden="true"
+              >
+                {{ link.icon }}
+              </mat-icon>
+
+            }
+            <a [routerLink]="link.path" class="text-sm hover:text-brand-400 transition-colors">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Products -->
+    <div>
+      <h3 class="text-sm font-semibold text-white uppercase tracking-wide">Products</h3>
+      <ul class="mt-4 space-y-2 list-none">
+        @for (link of navData.footerProductLinks; track link.path) {
+          <li class="group relative">
+              @if (link.icon) {
+                <mat-icon
+                  class="
+                    !m-0
+                    !h-5
+                    !w-5
+                    !text-[20px]
+                    shrink-0
+                  "
+                  aria-hidden="true"
+                >
+                  {{ link.icon }}
+                </mat-icon>
+
+              }
+            <a [routerLink]="link.path" class="text-sm hover:text-brand-400 transition-colors">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h3 class="text-sm font-semibold text-white uppercase tracking-wide">Contact</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        @for (phone of navData.contact.phones; track phone) {
+          <li>{{ phone }}</li>
+        }
+        <li>{{ navData.contact.email }}</li>
+        <li class="text-gray-400">{{ navData.contact.address }}</li>
+      </ul>
+
+      <div class="mt-4 flex gap-3">
+        @for (social of navData.socialLinks; track social.label) {
+          <a
+            [href]="social.url"
+            [attr.aria-label]="social.label"
+            class="text-gray-400 hover:text-brand-400 transition-colors"
+          >
+            <mat-icon>share</mat-icon>
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-500 text-center">
+      &copy; {{ currentYear }} Ankit. All rights reserved.
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,189 @@
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+
+<header
+  class="
+    sticky
+    top-0
+    z-50
+    w-full
+    bg-white/90
+    dark:bg-gray-900/90
+    backdrop-blur-md
+    transition-all
+    duration-200
+  "
+  [class.shadow-md]="isScrolled()"
+  [class.border-b]="isScrolled()"
+  [class.border-gray-200]="isScrolled()"
+  [class.dark:border-gray-700]="isScrolled()"
+>
+  <!-- ==========================================================
+       HEADER CONTAINER
+       ========================================================== -->
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+
+      <!-- ======================================================
+           LOGO
+           ====================================================== -->
+
+      <a
+        routerLink="/"
+        class="
+          flex
+          shrink-0
+          items-center
+          gap-2
+          rounded-md
+          focus:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-brand-500
+        "
+        aria-label="unick enterprises - Home"
+      >
+        <span
+          class="
+            text-xl
+            font-bold
+            tracking-tight
+            text-gray-900
+            dark:text-white
+          "
+        >
+<svg width="200" height="65" viewBox="0 0 300 85" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Flower / Fashion Icon -->
+  <g transform="translate(10 12)">
+    <circle cx="28" cy="28" r="8" fill="#F59E0B"/>
+
+    <circle cx="28" cy="12" r="10" fill="#EC4899"/>
+    <circle cx="44" cy="28" r="10" fill="#7C3AED"/>
+    <circle cx="28" cy="44" r="10" fill="#F59E0B"/>
+    <circle cx="12" cy="28" r="10" fill="#A855F7"/>
+  </g>
+
+  <text
+    x="75"
+    y="40"
+    font-family="Georgia, serif"
+    font-size="30"
+    font-weight="700"
+    fill="#7C3AED">
+    UNICK
+  </text>
+
+  <text
+    x="78"
+    y="62"
+    font-family="Arial"
+    font-size="10"
+    font-weight="600"
+    letter-spacing="4"
+    fill="#475569">
+    ENTERPRISES
+  </text>
+
+</svg>
+        </span>
+      </a>
+
+
+      <!-- ======================================================
+           DESKTOP NAVIGATION
+           ====================================================== -->
+
+      <nav
+        class="hidden lg:flex lg:items-center"
+        aria-label="Main navigation"
+      >
+        <app-mega-menu
+          [items]="navData.mainNav"
+        ></app-mega-menu>
+      </nav>
+
+
+      <!-- ======================================================
+           RIGHT ACTIONS
+           ====================================================== -->
+
+      <div class="flex items-center gap-1">
+
+        <!-- Theme Toggle -->
+        <button
+          mat-icon-button
+          type="button"
+          [attr.aria-label]="
+            themeService.theme() === 'dark'
+              ? 'Switch to light mode'
+              : 'Switch to dark mode'
+          "
+          [attr.aria-pressed]="themeService.theme() === 'dark'"
+          (click)="themeService.toggle()"
+        >
+          <mat-icon aria-hidden="true">
+            {{
+              themeService.theme() === 'dark'
+                ? 'light_mode'
+                : 'dark_mode'
+            }}
+          </mat-icon>
+        </button>
+
+
+        <!-- Mobile Menu Button -->
+        <button
+          mat-icon-button
+          type="button"
+          class="lg:hidden"
+          [attr.aria-label]="
+            mobileMenuOpen()
+              ? 'Close navigation menu'
+              : 'Open navigation menu'
+          "
+          [attr.aria-expanded]="mobileMenuOpen()"
+          aria-controls="mobile-navigation"
+          (click)="toggleMobileMenu()"
+        >
+          <mat-icon aria-hidden="true">
+            {{ mobileMenuOpen() ? 'close' : 'menu' }}
+          </mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ==========================================================
+       MOBILE NAVIGATION
+       ========================================================== -->
+
+  @if (mobileMenuOpen()) {
+    <nav
+      id="mobile-navigation"
+      class="
+        lg:hidden
+        border-t
+        border-gray-200
+        bg-white
+        px-4
+        py-3
+        dark:border-gray-700
+        dark:bg-gray-900
+      "
+      aria-label="Mobile navigation"
+    >
+      <app-mega-menu
+        [items]="navData.mainNav"
+        [vertical]="true"
+      ></app-mega-menu>
+    </nav>
+  }
+
+</header>
+

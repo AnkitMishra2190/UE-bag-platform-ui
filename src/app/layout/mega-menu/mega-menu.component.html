@@ -1,0 +1,286 @@
+<nav aria-label="Main navigation">
+
+  <ul
+    class="
+      flex
+      list-none
+      m-0
+      p-0
+    "
+    [class.flex-col]="vertical()"
+    [class.gap-1]="vertical()"
+    [class.items-center]="!vertical()"
+    [class.gap-6]="!vertical()"
+  >
+
+    @for (item of items(); track item.path) {
+
+      <li
+        class="group relative"
+        [class.w-full]="vertical()"
+      >
+
+        <!-- ====================================================
+             PARENT NAVIGATION LINK
+             ==================================================== -->
+
+        <a
+          [routerLink]="item.path"
+
+          routerLinkActive="
+            text-brand-600
+            dark:text-brand-400
+          "
+
+          [routerLinkActiveOptions]="{
+            exact: item.path === '/'
+          }"
+
+          [attr.aria-haspopup]="
+            item.children?.length
+              ? 'true'
+              : null
+          "
+
+          class="
+            inline-flex
+            items-center
+            gap-1.5
+            rounded-md
+            px-2
+            py-2
+            text-sm
+            font-medium
+            text-gray-700
+            dark:text-gray-200
+
+            hover:bg-brand-50
+            hover:text-brand-600
+
+            dark:hover:bg-gray-800
+            dark:hover:text-brand-400
+
+            focus:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-brand-500
+
+            transition-all
+            duration-200
+          "
+
+          [class.w-full]="vertical()"
+
+          [class.justify-between]="vertical()"
+        >
+
+          <!-- ==================================================
+               PARENT ICON
+               ================================================== -->
+
+          @if (item.icon) {
+
+            <mat-icon
+              class="
+                !m-0
+                !h-5
+                !w-5
+                !text-[20px]
+                shrink-0
+              "
+              aria-hidden="true"
+            >
+              {{ item.icon }}
+            </mat-icon>
+
+          }
+
+
+          <!-- ==================================================
+               PARENT LABEL
+               ================================================== -->
+
+          <span>
+            {{ item.label }}
+          </span>
+
+
+          <!-- ==================================================
+               DROPDOWN ARROW
+               ================================================== -->
+
+          @if (item.children?.length) {
+
+            <mat-icon
+              class="
+                !m-0
+                !h-5
+                !w-5
+                !text-[20px]
+                shrink-0
+
+                transition-transform
+                duration-200
+
+                group-hover:rotate-180
+                group-focus-within:rotate-180
+              "
+
+              aria-hidden="true"
+            >
+              expand_more
+            </mat-icon>
+
+          }
+
+        </a>
+
+
+        <!-- ====================================================
+             DROPDOWN
+             ==================================================== -->
+
+        @if (item.children?.length) {
+
+          <div
+            class="
+              nav-dropdown
+
+              rounded-xl
+
+              border
+              border-gray-100
+
+              bg-white
+
+              p-2
+
+              shadow-xl
+              shadow-gray-900/10
+
+              dark:border-gray-700
+              dark:bg-gray-800
+              dark:shadow-black/20
+            "
+
+            [class.nav-dropdown--vertical]="vertical()"
+          >
+
+            <ul
+              class="
+                list-none
+                m-0
+                p-0
+                space-y-1
+              "
+
+              role="menu"
+            >
+
+              @for (
+                child of item.children;
+                track child.path
+              ) {
+
+                <li role="none">
+
+                  <!-- ==========================================
+                       CHILD LINK
+                       ========================================== -->
+
+                  <a
+                    [routerLink]="child.path"
+
+                    routerLinkActive="
+                      bg-brand-50
+                      text-brand-600
+
+                      dark:bg-gray-700
+                      dark:text-brand-400
+                    "
+
+                    role="menuitem"
+
+                    class="
+                      flex
+                      items-center
+                      gap-2
+
+                      rounded-lg
+
+                      px-3
+                      py-2
+
+                      text-sm
+
+                      text-gray-600
+                      dark:text-gray-300
+
+                      hover:bg-brand-50
+                      hover:text-brand-600
+
+                      dark:hover:bg-gray-700
+                      dark:hover:text-brand-400
+
+                      focus:bg-brand-50
+                      focus:text-brand-600
+
+                      dark:focus:bg-gray-700
+                      dark:focus:text-brand-400
+
+                      focus:outline-none
+
+                      transition-colors
+                      duration-150
+                    "
+                  >
+
+                    <!-- ========================================
+                         CHILD ICON
+                         ======================================== -->
+
+                    @if (item.icon) {
+
+                      <mat-icon
+                        class="
+                          !m-0
+                          !h-5
+                          !w-5
+                          !text-[19px]
+                          shrink-0
+                        "
+
+                        aria-hidden="true"
+                      >
+                        {{ item.icon }}
+                      </mat-icon>
+
+                    }
+
+
+                    <!-- ========================================
+                         CHILD LABEL
+                         ======================================== -->
+
+                    <span>
+                      {{ child.label }}
+                    </span>
+
+                  </a>
+
+                </li>
+
+              }
+
+            </ul>
+
+          </div>
+
+        }
+
+      </li>
+
+    }
+
+  </ul>
+
+</nav>

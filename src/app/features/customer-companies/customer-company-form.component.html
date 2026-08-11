@@ -1,0 +1,73 @@
+<app-modal [title]="editing ? 'Edit Company' : 'New Company'" (close)="close.emit()">
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label class="field">
+      <span class="field-label">Company Name</span>
+      <input type="text" formControlName="company_name" placeholder="e.g. Global Retail Corp" />
+      @if (form.get('company_name')?.invalid && form.get('company_name')?.touched) {
+        <span class="field-error">Company name is required.</span>
+      }
+    </label>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Industry</span>
+        <input type="text" formControlName="industry" placeholder="e.g. Retail" />
+      </label>
+      <label class="field">
+        <span class="field-label">GST Number</span>
+        <input type="text" formControlName="gst_number" />
+      </label>
+    </div>
+
+    <label class="field">
+      <span class="field-label">Website</span>
+      <input type="text" formControlName="website" placeholder="https://" />
+    </label>
+
+    <label class="field">
+      <span class="field-label">Address</span>
+      <input type="text" formControlName="address_line1" placeholder="Street address" />
+    </label>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">City</span>
+        <input type="text" formControlName="city" />
+      </label>
+      <label class="field">
+        <span class="field-label">State</span>
+        <input type="text" formControlName="state" />
+      </label>
+    </div>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Country</span>
+        <input type="text" formControlName="country" />
+      </label>
+      <label class="field">
+        <span class="field-label">Postal Code</span>
+        <input type="text" formControlName="postal_code" />
+      </label>
+    </div>
+
+    <label class="field">
+      <span class="field-label">Status</span>
+      <select formControlName="status">
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </label>
+
+    @if (errorMessage) {
+      <div class="alert">{{ errorMessage }}</div>
+    }
+
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" (click)="close.emit()">Cancel</button>
+      <button type="submit" class="btn-primary" [disabled]="saving">
+        {{ saving ? 'Saving…' : editing ? 'Save Changes' : 'Create Company' }}
+      </button>
+    </div>
+  </form>
+</app-modal>

@@ -1,0 +1,130 @@
+/*
+ * ============================================================
+ * NAVIGATION DROPDOWN
+ * ============================================================
+ */
+
+.nav-dropdown {
+  position: absolute;
+
+  top: calc(100% + 0.5rem);
+  left: 0;
+
+  min-width: 15rem;
+
+  /*
+   * Hidden
+   */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  /*
+   * Animation
+   */
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top left;
+
+  transition:
+    opacity 180ms ease,
+    visibility 180ms ease,
+    transform 180ms ease;
+
+  z-index: 50;
+}
+
+
+/*
+ * ============================================================
+ * OPEN DROPDOWN
+ * ============================================================
+ */
+
+.group:hover > .nav-dropdown,
+.group:focus-within > .nav-dropdown {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform: translateY(0) scale(1);
+}
+
+
+/*
+ * ============================================================
+ * DROPDOWN LINKS
+ * ============================================================
+ */
+
+.nav-dropdown a {
+  white-space: nowrap;
+}
+
+
+/*
+ * ============================================================
+ * VERTICAL MENU
+ * ============================================================
+ */
+
+.nav-dropdown--vertical {
+
+  position: static;
+
+  width: 100%;
+
+  min-width: 0;
+
+  margin-top: 0.25rem;
+
+  padding: 0.25rem 0 0.25rem 0.75rem;
+
+  border: 0;
+
+  border-radius: 0;
+
+  box-shadow: none;
+
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform: none;
+
+  transition: none;
+}
+
+
+/*
+ * ============================================================
+ * VERTICAL DROPDOWN LINKS
+ * ============================================================
+ */
+
+.nav-dropdown--vertical a {
+  width: 100%;
+}
+
+
+/*
+ * ============================================================
+ * REDUCED MOTION
+ * ============================================================
+ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .nav-dropdown,
+  .nav-dropdown a,
+  .nav-dropdown mat-icon {
+
+    transition: none !important;
+
+  }
+
+}

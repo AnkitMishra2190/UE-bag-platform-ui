@@ -1,0 +1,98 @@
+<div class="page-header">
+  <div>
+    <h1>Products</h1>
+    <p class="text-muted">Manage your product catalog — pricing, MOQ, and featured status.</p>
+  </div>
+  <button class="btn-primary" (click)="openCreate()">+ New Product</button>
+</div>
+
+<div class="toolbar">
+  <input
+    type="search"
+    placeholder="Search by name or SKU…"
+    [(ngModel)]="search"
+    (ngModelChange)="onFilterChange()"
+    class="search-input"
+  />
+  <select [(ngModel)]="categoryFilter" (ngModelChange)="onFilterChange()">
+    <option value="">All categories</option>
+    @for (cat of categories(); track cat.id) {
+      <option [value]="cat.id">{{ cat.name }}</option>
+    }
+  </select>
+  <select [(ngModel)]="statusFilter" (ngModelChange)="onFilterChange()">
+    <option value="">All statuses</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+  </select>
+</div>
+
+<div class="table-card">
+  @if (loading()) {
+    <div class="empty-state">Loading…</div>
+  } @else if (products().length === 0) {
+    <div class="empty-state">No products found.</div>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product</th>
+          <th>Category</th>
+          <th>SKU</th>
+          <th>MOQ</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of products(); track product.id) {
+          <tr>
+            <td>
+              <button
+                class="star-toggle"
+                [class.starred]="product.featured"
+                (click)="toggleFeatured(product)"
+                title="Toggle featured"
+              >★</button>
+            </td>
+            <td><strong>{{ product.name }}</strong></td>
+            <td class="text-muted">{{ product.category_name }}</td>
+            <td class="mono text-muted">{{ product.sku }}</td>
+            <td class="mono">{{ product.moq }}</td>
+            <td class="mono">{{ priceRange(product) }}</td>
+            <td>
+              <button
+                class="status-badge"
+                [class.status-active]="product.status === 'active'"
+                [class.status-inactive]="product.status === 'inactive'"
+                (click)="toggleStatus(product)"
+                title="Click to toggle"
+              >
+                {{ product.status }}
+              </button>
+            </td>
+            <td class="actions-cell">
+              <button class="btn-ghost btn-sm" (click)="openEdit(product)">Edit</button>
+              <button class="btn-danger-text" (click)="remove(product)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <span class="text-muted" style="font-size: var(--fs-xs);">{{ total() }} total</span>
+      <div class="pagination-controls">
+        <button class="btn-ghost btn-sm" [disabled]="page() <= 1" (click)="goToPage(page() - 1)">Prev</button>
+        <span class="text-muted" style="font-size: var(--fs-xs);">Page {{ page() }} of {{ totalPages }}</span>
+        <button class="btn-ghost btn-sm" [disabled]="page() >= totalPages" (click)="goToPage(page() + 1)">Next</button>
+      </div>
+    </div>
+  }
+</div>
+
+@if (showForm) {
+  <app-product-form [editing]="editingProduct" (close)="closeForm()" (saved)="onSaved()" />
+}

@@ -13,6 +13,59 @@ import {
 
 export const routes: Routes = [
   {
+    path: '',
+    loadComponent: () =>
+      import('./features/home/home.component').then((m) => m.HomeComponent),
+  },
+
+    {
+    path: 'about',
+    loadComponent: () =>
+      import('../app/core/pages/about/about.component')
+        .then(m => m.AboutComponent),
+    data: {
+      title: 'About Us'
+    }
+  },
+
+
+  {
+    path: 'categories',
+    loadChildren: () =>
+      import('../app/core/pages/categories/category.routes')
+        .then(m => m.CATEGORY_ROUTES)
+  },
+
+  {
+    path: 'categories/:category/:product',
+    loadComponent: () =>
+      import('../app/core/pages/categories/product-details/product-details.component')
+        .then(m => m.ProductDetailsComponent)
+  },
+
+
+  {
+    path: 'industries',
+    loadComponent: () =>
+      import('../app/features/home/sections/industries/industries.component')
+        .then(m => m.IndustriesComponent),
+    data: {
+      title: 'Contact Us'
+    }
+  },
+
+  // { path: 'gallery', loadComponent: comingSoon, data: { title: 'Gallery' } },
+
+  {
+    path: 'contact',
+    loadComponent: () =>
+      import('../app/core/pages/contact/contact.component')
+        .then(m => m.ContactComponent),
+    data: {
+      title: 'Contact Us'
+    }
+  },
+  {
     path: 'login',
     loadComponent: () => import('./features/auth/login.component').then((m) => m.LoginComponent),
   },
@@ -33,18 +86,32 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/categories/category-list.component').then((m) => m.CategoryListComponent),
       },
-      { path: 'products', component: PlaceholderPageComponent, data: { title: 'Products' } },
+      { path: 'products', loadComponent: () => import('./features/products/product-list.component').then((m) => m.ProductListComponent) },
       { path: 'colors', component: GenericCrudPageComponent, data: { config: COLOR_CONFIG } },
       { path: 'materials', component: GenericCrudPageComponent, data: { config: MATERIAL_CONFIG } },
       { path: 'sizes', component: GenericCrudPageComponent, data: { config: SIZE_CONFIG } },
       { path: 'tags', component: GenericCrudPageComponent, data: { config: TAG_CONFIG } },
 
       // ---------- CRM ----------
-      { path: 'customers', component: PlaceholderPageComponent, data: { title: 'Customers' } },
-      { path: 'customer-companies', component: PlaceholderPageComponent, data: { title: 'Customer Companies' } },
+      {
+        path: 'customers',
+        loadComponent: () =>
+          import('./features/customers/customer-list.component').then((m) => m.CustomerListComponent),
+      },
+      {
+        path: 'customer-companies',
+        loadComponent: () =>
+          import('./features/customer-companies/customer-company-list.component').then(
+            (m) => m.CustomerCompanyListComponent
+          ),
+      },
 
       // ---------- Sales ----------
-      { path: 'inquiries', component: PlaceholderPageComponent, data: { title: 'Inquiries' } },
+      {
+        path: 'inquiries',
+        loadComponent: () =>
+          import('./features/inquiries/inquiry-list.component').then((m) => m.InquiryListComponent),
+      },
       { path: 'quotations', component: PlaceholderPageComponent, data: { title: 'Quotations' } },
       { path: 'orders', component: PlaceholderPageComponent, data: { title: 'Orders' } },
 

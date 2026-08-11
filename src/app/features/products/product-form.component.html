@@ -1,0 +1,90 @@
+<app-modal [title]="editing ? 'Edit Product' : 'New Product'" (close)="close.emit()">
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label class="field">
+      <span class="field-label">Category</span>
+      <select formControlName="category_id">
+        <option [ngValue]="null" disabled>Select a category…</option>
+        @for (cat of categories(); track cat.id) {
+          <option [ngValue]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+      @if (form.get('category_id')?.invalid && form.get('category_id')?.touched) {
+        <span class="field-error">Category is required.</span>
+      }
+    </label>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Product Name</span>
+        <input type="text" formControlName="name" placeholder="e.g. Travel Duffel Bag" />
+        @if (form.get('name')?.invalid && form.get('name')?.touched) {
+          <span class="field-error">Name is required.</span>
+        }
+      </label>
+      <label class="field">
+        <span class="field-label">SKU</span>
+        <input type="text" formControlName="sku" placeholder="e.g. TDB-001" />
+        @if (form.get('sku')?.invalid && form.get('sku')?.touched) {
+          <span class="field-error">SKU is required.</span>
+        }
+      </label>
+    </div>
+
+    <label class="field">
+      <span class="field-label">Slug <span class="text-faint">(optional — auto-generated from name)</span></span>
+      <input type="text" formControlName="slug" placeholder="travel-duffel-bag" />
+    </label>
+
+    <label class="field">
+      <span class="field-label">Short Description</span>
+      <textarea formControlName="short_description" rows="2"></textarea>
+    </label>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">MOQ (Minimum Order Quantity)</span>
+        <input type="number" formControlName="moq" min="1" />
+      </label>
+      <label class="field">
+        <span class="field-label">Primary Material</span>
+        <input type="text" formControlName="primary_material" placeholder="e.g. 600D Polyester" />
+      </label>
+    </div>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Price Min</span>
+        <input type="number" formControlName="price_min" step="0.01" />
+      </label>
+      <label class="field">
+        <span class="field-label">Price Max</span>
+        <input type="number" formControlName="price_max" step="0.01" />
+      </label>
+    </div>
+
+    <div class="field-row">
+      <label class="checkbox-field">
+        <input type="checkbox" formControlName="featured" />
+        <span>Featured product</span>
+      </label>
+      <label class="field">
+        <span class="field-label">Status</span>
+        <select formControlName="status">
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </label>
+    </div>
+
+    @if (errorMessage) {
+      <div class="alert">{{ errorMessage }}</div>
+    }
+
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" (click)="close.emit()">Cancel</button>
+      <button type="submit" class="btn-primary" [disabled]="saving">
+        {{ saving ? 'Saving…' : editing ? 'Save Changes' : 'Create Product' }}
+      </button>
+    </div>
+  </form>
+</app-modal>

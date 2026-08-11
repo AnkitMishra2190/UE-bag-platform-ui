@@ -1,0 +1,83 @@
+<div class="page-header">
+  <div>
+    <h1>Companies</h1>
+    <p class="text-muted">Manage the businesses your customer contacts belong to.</p>
+  </div>
+  <button class="btn-primary" (click)="openCreate()">+ New Company</button>
+</div>
+
+<div class="toolbar">
+  <input
+    type="search"
+    placeholder="Search companies…"
+    [(ngModel)]="search"
+    (ngModelChange)="onSearchChange()"
+    class="search-input"
+  />
+  <select [(ngModel)]="statusFilter" (ngModelChange)="onSearchChange()">
+    <option value="">All statuses</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+  </select>
+</div>
+
+<div class="table-card">
+  @if (loading()) {
+    <div class="empty-state">Loading…</div>
+  } @else if (companies().length === 0) {
+    <div class="empty-state">No companies found.</div>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Industry</th>
+          <th>GST Number</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (company of companies(); track company.id) {
+          <tr>
+            <td><strong>{{ company.company_name }}</strong></td>
+            <td class="text-muted">{{ company.industry || '—' }}</td>
+            <td class="mono text-muted">{{ company.gst_number || '—' }}</td>
+            <td class="text-muted">
+              {{ company.city ? company.city + (company.country ? ', ' + company.country : '') : '—' }}
+            </td>
+            <td>
+              <button
+                class="status-badge"
+                [class.status-active]="company.status === 'active'"
+                [class.status-inactive]="company.status === 'inactive'"
+                (click)="toggleStatus(company)"
+                title="Click to toggle"
+              >
+                {{ company.status }}
+              </button>
+            </td>
+            <td class="actions-cell">
+              <button class="btn-ghost btn-sm" (click)="openEdit(company)">Edit</button>
+              <button class="btn-danger-text" (click)="remove(company)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <span class="text-muted" style="font-size: var(--fs-xs);">{{ total() }} total</span>
+      <div class="pagination-controls">
+        <button class="btn-ghost btn-sm" [disabled]="page() <= 1" (click)="goToPage(page() - 1)">Prev</button>
+        <span class="text-muted" style="font-size: var(--fs-xs);">Page {{ page() }} of {{ totalPages }}</span>
+        <button class="btn-ghost btn-sm" [disabled]="page() >= totalPages" (click)="goToPage(page() + 1)">Next</button>
+      </div>
+    </div>
+  }
+</div>
+
+@if (showForm) {
+  <app-customer-company-form [editing]="editingCompany" (close)="closeForm()" (saved)="onSaved()" />
+}

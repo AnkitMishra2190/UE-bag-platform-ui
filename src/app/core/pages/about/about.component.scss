@@ -1,0 +1,62 @@
+:host {
+  display: block;
+}
+
+mat-icon {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+img {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+
+.about-gallery-swiper {
+  width: 100%;
+  padding-bottom: 42px;
+}
+
+/*
+ * Swiper pagination
+ */
+.about-gallery-swiper::part(pagination) {
+  bottom: 0;
+}
+
+.about-gallery-swiper::part(bullet) {
+  width: 8px;
+  height: 8px;
+  opacity: 0.35;
+  transition:
+    width 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.about-gallery-swiper::part(bullet-active) {
+  width: 24px;
+  border-radius: 9999px;
+  opacity: 1;
+}
+
+/*
+ * Prevent images from creating unwanted layout issues.
+ */
+.about-gallery-swiper swiper-slide {
+  height: auto;
+}
+
+.about-gallery-swiper img {
+  display: block;
+}

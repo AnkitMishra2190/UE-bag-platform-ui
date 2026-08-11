@@ -1,0 +1,75 @@
+<app-modal title="New Inquiry" (close)="close.emit()">
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Customer</span>
+        <select formControlName="customer_id">
+          <option [ngValue]="null" disabled>Select a customer…</option>
+          @for (c of customers(); track c.id) {
+            <option [ngValue]="c.id">{{ c.name }} @if (c.company_name) { ({{ c.company_name }}) }</option>
+          }
+        </select>
+        @if (form.get('customer_id')?.invalid && form.get('customer_id')?.touched) {
+          <span class="field-error">Customer is required.</span>
+        }
+      </label>
+      <label class="field">
+        <span class="field-label">Product <span class="text-faint">(optional)</span></span>
+        <select formControlName="product_id">
+          <option [ngValue]="null">Not product-specific</option>
+          @for (p of products(); track p.id) {
+            <option [ngValue]="p.id">{{ p.name }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <label class="field">
+      <span class="field-label">Subject</span>
+      <input type="text" formControlName="subject" placeholder="e.g. Bulk order — 500 duffel bags" />
+      @if (form.get('subject')?.invalid && form.get('subject')?.touched) {
+        <span class="field-error">Subject is required.</span>
+      }
+    </label>
+
+    <label class="field">
+      <span class="field-label">Message</span>
+      <textarea formControlName="message" rows="4" placeholder="Details of the inquiry…"></textarea>
+      @if (form.get('message')?.invalid && form.get('message')?.touched) {
+        <span class="field-error">Message is required.</span>
+      }
+    </label>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Quantity Required</span>
+        <input type="number" formControlName="quantity_required" min="1" />
+      </label>
+      <label class="field">
+        <span class="field-label">Priority</span>
+        <select formControlName="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
+      </label>
+    </div>
+
+    <label class="field">
+      <span class="field-label">Source</span>
+      <input type="text" formControlName="source" placeholder="e.g. Website Form, WhatsApp, Email" />
+    </label>
+
+    @if (errorMessage) {
+      <div class="alert">{{ errorMessage }}</div>
+    }
+
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" (click)="close.emit()">Cancel</button>
+      <button type="submit" class="btn-primary" [disabled]="saving">
+        {{ saving ? 'Saving…' : 'Create Inquiry' }}
+      </button>
+    </div>
+  </form>
+</app-modal>

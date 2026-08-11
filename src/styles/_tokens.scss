@@ -87,3 +87,37 @@
   @include stitch-line;
   margin: var(--space-5) 0;
 }
+
+// ============================================
+// Dark mode — same tokens, different values.
+// Every component already reads these CSS custom properties, so
+// switching the [data-theme] attribute on <html> re-themes the whole
+// app with no per-component changes needed.
+// ============================================
+:root[data-theme='dark'] {
+  --color-paper: #12151c;
+  --color-surface: #1a1e27;
+  --color-border: #2a2f3a;
+  --color-border-strong: #3a4150;
+
+  --color-text: #e8eaed;
+  --color-text-muted: #9aa3b2;
+  --color-text-faint: #6b7280;
+
+  --color-accent: #d1683f;
+  --color-accent-hover: #e2764c;
+  --color-accent-soft: #3a2620;
+
+  --color-success: #4caf82;
+  --color-success-soft: #16281f;
+  --color-warning: #d8ab3f;
+  --color-warning-soft: #2c2413;
+  --color-danger: #e0665a;
+  --color-danger-soft: #2e1a18;
+  --color-info: #5b9bd5;
+  --color-info-soft: #182533;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+}

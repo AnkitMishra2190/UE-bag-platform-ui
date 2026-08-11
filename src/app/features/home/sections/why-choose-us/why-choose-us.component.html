@@ -1,0 +1,24 @@
+<section class="bg-gray-50 dark:bg-gray-900/50 py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-sm font-semibold tracking-wide uppercase text-brand-600 dark:text-brand-400">
+        Our Advantage
+        </span>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Why Choose Us</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (point of points; track point.title) {
+        <div class="text-center">
+            <div
+            class="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500 to-wine-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20"
+            >
+            <mat-icon>{{ point.icon }}</mat-icon>
+            </div>
+            <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">{{ point.title }}</h3>
+            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ point.description }}</p>
+        </div>
+        }
+    </div>
+    </div>
+</section>

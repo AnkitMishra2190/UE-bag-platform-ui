@@ -1,0 +1,77 @@
+<app-modal [title]="editing ? 'Edit Customer' : 'New Customer'" (close)="close.emit()">
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Name</span>
+        <input type="text" formControlName="name" placeholder="Contact person's name" />
+        @if (form.get('name')?.invalid && form.get('name')?.touched) {
+          <span class="field-error">Name is required.</span>
+        }
+      </label>
+      <label class="field">
+        <span class="field-label">Email</span>
+        <input type="email" formControlName="email" placeholder="name@company.com" />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="field-error">A valid email is required.</span>
+        }
+      </label>
+    </div>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Phone</span>
+        <input type="text" formControlName="phone" />
+      </label>
+      <label class="field">
+        <span class="field-label">Designation</span>
+        <input type="text" formControlName="designation" placeholder="e.g. Procurement Manager" />
+      </label>
+    </div>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Company <span class="text-faint">(optional)</span></span>
+        <select formControlName="company_id">
+          <option [ngValue]="null">No company</option>
+          @for (c of companies(); track c.id) {
+            <option [ngValue]="c.id">{{ c.company_name }}</option>
+          }
+        </select>
+      </label>
+      <label class="field">
+        <span class="field-label">Assigned Sales Rep <span class="text-faint">(optional)</span></span>
+        <select formControlName="assigned_to">
+          <option [ngValue]="null">Unassigned</option>
+          @for (rep of salesReps(); track rep.id) {
+            <option [ngValue]="rep.id">{{ rep.name }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">Source</span>
+        <input type="text" formControlName="source" placeholder="e.g. Website, Referral" />
+      </label>
+      <label class="field">
+        <span class="field-label">Status</span>
+        <select formControlName="status">
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </label>
+    </div>
+
+    @if (errorMessage) {
+      <div class="alert">{{ errorMessage }}</div>
+    }
+
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" (click)="close.emit()">Cancel</button>
+      <button type="submit" class="btn-primary" [disabled]="saving">
+        {{ saving ? 'Saving…' : editing ? 'Save Changes' : 'Create Customer' }}
+      </button>
+    </div>
+  </form>
+</app-modal>

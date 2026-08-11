@@ -1,0 +1,1795 @@
+@if (selectedCategory() && selectedProduct()) {
+
+  <!-- =====================================================
+       BREADCRUMB
+  ====================================================== -->
+
+  <div
+    class="
+      mx-auto
+      max-w-7xl
+      px-4
+      sm:px-6
+      lg:px-8
+    "
+  >
+
+    <app-back-button
+      label="Back to Products"
+    />
+
+    <!-- Breadcrumb -->
+
+    <div
+      class="
+        mt-5
+        flex
+        flex-wrap
+        items-center
+        gap-1.5
+        text-xs
+        text-gray-500
+        dark:text-gray-400
+        sm:text-sm
+      "
+    >
+
+      <a
+        routerLink="/"
+        class="
+          transition-colors
+          hover:text-brand-600
+          dark:hover:text-brand-400
+        "
+      >
+        Home
+      </a>
+
+      <mat-icon
+        class="
+          !m-0
+          !h-4
+          !w-4
+          !text-[16px]
+          text-gray-400
+        "
+        aria-hidden="true"
+      >
+        chevron_right
+      </mat-icon>
+
+      <a
+        routerLink="/categories"
+        class="
+          transition-colors
+          hover:text-brand-600
+          dark:hover:text-brand-400
+        "
+      >
+        Categories
+      </a>
+
+      <mat-icon
+        class="
+          !m-0
+          !h-4
+          !w-4
+          !text-[16px]
+          text-gray-400
+        "
+        aria-hidden="true"
+      >
+        chevron_right
+      </mat-icon>
+
+      <a
+        [routerLink]="[
+          '/categories',
+          selectedCategory()!.slug
+        ]"
+        class="
+          transition-colors
+          hover:text-brand-600
+          dark:hover:text-brand-400
+        "
+      >
+        {{ selectedCategory()!.name }}
+      </a>
+
+      <mat-icon
+        class="
+          !m-0
+          !h-4
+          !w-4
+          !text-[16px]
+          text-gray-400
+        "
+        aria-hidden="true"
+      >
+        chevron_right
+      </mat-icon>
+
+      <span
+        class="
+          font-semibold
+          text-gray-800
+          dark:text-gray-200
+        "
+      >
+        {{ selectedProduct()!.name }}
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       PRODUCT MAIN SECTION
+  ====================================================== -->
+
+  <div
+    class="
+      mx-auto
+      max-w-7xl
+      px-4
+      sm:px-6
+      lg:px-8
+    "
+  >
+
+    <div
+      class="
+        grid
+        gap-8
+        lg:grid-cols-[1.05fr_0.95fr]
+        lg:gap-12
+        xl:gap-16
+      "
+    >
+
+
+      <!-- =================================================
+           LEFT — PRODUCT IMAGE GALLERY
+      ================================================== -->
+
+      <div>
+
+        <!-- =================================================
+             MAIN IMAGE CARD
+        ================================================== -->
+
+        <div
+          class="
+            relative
+            overflow-hidden
+            rounded-[2rem]
+            border
+            border-gray-200
+            bg-gradient-to-br
+            from-gray-50
+            to-gray-100
+            shadow-sm
+            dark:border-gray-800
+            dark:from-gray-900
+            dark:to-gray-800
+          "
+        >
+
+          <!-- =================================================
+               PREMIUM BADGE
+          ================================================== -->
+
+          <div
+            class="
+              pointer-events-none
+              absolute
+              left-5
+              top-5
+              z-20
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              bg-white/90
+              px-3.5
+              py-2
+              text-xs
+              font-bold
+              text-gray-800
+              shadow-lg
+              backdrop-blur-md
+              dark:bg-gray-900/90
+              dark:text-gray-100
+            "
+          >
+
+            <mat-icon
+              class="
+                !m-0
+                !h-4
+                !w-4
+                !text-[16px]
+                text-brand-600
+                dark:text-brand-400
+              "
+              aria-hidden="true"
+            >
+              verified
+            </mat-icon>
+
+            Premium Quality
+
+          </div>
+
+
+          <!-- =================================================
+               IMAGE VIEWPORT
+          ================================================== -->
+
+          <div
+            class="
+              group
+              relative
+              flex
+              min-h-[380px]
+              cursor-crosshair
+              items-center
+              justify-center
+              overflow-hidden
+              p-4
+              sm:min-h-[480px]
+              sm:p-8
+              lg:min-h-[560px]
+            "
+
+            (mouseenter)="onImageMouseEnter()"
+
+            (mouseleave)="onImageMouseLeave()"
+
+            (mousemove)="onImageMouseMove($event)"
+          >
+
+            <!-- =================================================
+                 MAIN PRODUCT IMAGE
+            ================================================== -->
+
+            <img
+              [src]="selectedImage()"
+              [alt]="selectedProduct()!.name"
+
+              class="
+                pointer-events-none
+                h-full
+                max-h-[560px]
+                w-full
+                object-contain
+                select-none
+                will-change-transform
+              "
+
+              [style.transform]="
+                isImageZoomed
+                  ? 'scale(2.5)'
+                  : 'scale(1)'
+              "
+
+              [style.transform-origin]="zoomPosition"
+
+              [style.transition]="
+                isImageZoomed
+                  ? 'transform 80ms ease-out'
+                  : 'transform 300ms ease-out'
+              "
+            />
+
+
+            <!-- =================================================
+                 ZOOM HINT
+            ================================================== -->
+
+            @if (!isImageZoomed) {
+
+              <div
+                class="
+                  pointer-events-none
+                  absolute
+                  bottom-5
+                  left-1/2
+                  z-10
+                  flex
+                  -translate-x-1/2
+                  items-center
+                  gap-2
+                  rounded-full
+                  bg-black/60
+                  px-4
+                  py-2
+                  text-xs
+                  font-medium
+                  text-white
+                  opacity-0
+                  backdrop-blur-sm
+                  transition-opacity
+                  duration-300
+                  group-hover:opacity-100
+                "
+              >
+
+                <mat-icon
+                  class="
+                    !m-0
+                    !h-4
+                    !w-4
+                    !text-[16px]
+                  "
+                  aria-hidden="true"
+                >
+                  zoom_in
+                </mat-icon>
+
+                Move cursor to zoom
+
+              </div>
+
+            }
+
+          </div>
+
+
+          <!-- =================================================
+               BOTTOM IMAGE GRADIENT
+          ================================================== -->
+
+          <div
+            class="
+              pointer-events-none
+              absolute
+              inset-x-0
+              bottom-0
+              z-10
+              h-24
+              bg-gradient-to-t
+              from-black/10
+              to-transparent
+              dark:from-black/30
+            "
+          ></div>
+
+        </div>
+
+
+
+
+<!-- =================================================
+     PRODUCT IMAGE THUMBNAILS
+================================================== -->
+
+@if (
+  selectedProduct()!.gallery &&
+  selectedProduct()!.gallery!.length
+) {
+
+  <div class="mt-5">
+
+    <!-- Thumbnail heading -->
+
+    <div
+      class="
+        mb-3
+        flex
+        items-center
+        justify-between
+      "
+    >
+
+      <p
+        class="
+          text-xs
+          font-bold
+          uppercase
+          tracking-[0.15em]
+          text-gray-500
+          dark:text-gray-400
+        "
+      >
+        Product Images
+      </p>
+
+      <span
+        class="
+          text-xs
+          text-gray-400
+          dark:text-gray-500
+        "
+      >
+        {{ selectedProduct()!.gallery!.length }} images
+      </span>
+
+    </div>
+
+
+    <!-- =================================================
+         THUMBNAILS
+    ================================================== -->
+
+    <div
+      class="
+        grid
+        grid-cols-4
+        gap-3
+        sm:grid-cols-6
+      "
+    >
+
+      @for (
+        image of selectedProduct()!.gallery!;
+        track image;
+        let i = $index
+      ) {
+
+        <button
+          type="button"
+          (click)="selectImage(image)"
+          [attr.aria-label]="'View product image ' + (i + 1)"
+          [attr.aria-current]="
+            selectedImage() === image ? 'true' : null
+          "
+          class="
+            group
+            relative
+            aspect-square
+            overflow-hidden
+            rounded-xl
+            border
+            bg-gray-50
+            p-1
+            transition-all
+            duration-300
+            focus:outline-none
+            focus:ring-2
+            focus:ring-brand-500
+            focus:ring-offset-2
+            dark:bg-gray-900
+            dark:focus:ring-offset-gray-950
+          "
+          [class.border-brand-600]="selectedImage() === image"
+          [class.border-2]="selectedImage() === image"
+          [class.border-gray-200]="selectedImage() !== image"
+          [class.dark:border-brand-500]="selectedImage() === image"
+          [class.dark:border-gray-700]="selectedImage() !== image"
+          [class.hover:border-brand-400]="selectedImage() !== image"
+          [class.hover:shadow-md]="selectedImage() !== image"
+        >
+
+          <!-- Thumbnail image -->
+
+          <img
+            [src]="image"
+            [alt]="
+              selectedProduct()!.name +
+              ' thumbnail ' +
+              (i + 1)
+            "
+            loading="lazy"
+            class="
+              h-full
+              w-full
+              rounded-lg
+              object-cover
+              transition-transform
+              duration-300
+              group-hover:scale-105
+            "
+          />
+
+
+          <!-- =================================================
+               ACTIVE IMAGE INDICATOR
+          ================================================== -->
+
+          @if (selectedImage() === image) {
+
+            <div
+              class="
+                pointer-events-none
+                absolute
+                inset-0
+                rounded-lg
+                ring-2
+                ring-inset
+                ring-brand-600
+                dark:ring-brand-500
+              "
+            ></div>
+
+
+            <!-- Check icon -->
+
+            <div
+              class="
+                pointer-events-none
+                absolute
+                right-1.5
+                top-1.5
+                flex
+                h-5
+                w-5
+                items-center
+                justify-center
+                rounded-full
+                bg-brand-600
+                text-white
+                shadow-md
+                dark:bg-brand-500
+              "
+            >
+
+              <mat-icon
+                class="
+                  !m-0
+                  !h-3.5
+                  !w-3.5
+                  !text-[14px]
+                "
+                aria-hidden="true"
+              >
+                check
+              </mat-icon>
+
+            </div>
+
+          }
+
+        </button>
+
+      }
+
+    </div>
+
+  </div>
+
+}
+
+      </div>
+
+
+
+      <!-- =====================================================
+           RIGHT — PRODUCT INFORMATION CARD
+      ====================================================== -->
+
+      <div
+        class="
+          flex
+          flex-col
+          rounded-[2rem]
+          border
+          border-gray-200
+          bg-white
+          p-6
+          shadow-sm
+          dark:border-gray-800
+          dark:bg-gray-900
+          sm:p-8
+        "
+      >
+
+        <!-- =================================================
+             BRAND
+        ================================================== -->
+
+        <div
+          class="
+            flex
+            items-center
+            justify-between
+            gap-4
+          "
+        >
+
+          <div
+            class="
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              bg-brand-50
+              px-3
+              py-1.5
+              text-xs
+              font-bold
+              uppercase
+              tracking-wider
+              text-brand-700
+              dark:bg-brand-950/50
+              dark:text-brand-400
+            "
+          >
+
+            <span
+              class="
+                h-1.5
+                w-1.5
+                rounded-full
+                bg-brand-600
+                dark:bg-brand-400
+              "
+            ></span>
+
+            {{ selectedProduct()!.brand || 'Unick Enterprises' }}
+
+          </div>
+
+
+          <!-- Product icon -->
+
+          <div
+            class="
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-xl
+              bg-gray-100
+              text-gray-600
+              dark:bg-gray-800
+              dark:text-gray-300
+            "
+          >
+
+            <mat-icon
+              class="!m-0"
+              aria-hidden="true"
+            >
+              shopping_bag
+            </mat-icon>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCT NAME
+        ================================================== -->
+
+        <h1
+          class="
+            mt-5
+            text-3xl
+            font-extrabold
+            tracking-tight
+            text-gray-900
+            dark:text-white
+            sm:text-4xl
+          "
+        >
+          {{ selectedProduct()!.name }}
+        </h1>
+
+
+
+        <!-- =================================================
+             DESCRIPTION
+        ================================================== -->
+
+        <p
+          class="
+            mt-4
+            text-sm
+            leading-7
+            text-gray-600
+            dark:text-gray-400
+            sm:text-base
+          "
+        >
+          {{ selectedProduct()!.description }}
+        </p>
+
+
+
+        <!-- Divider -->
+
+        <div
+          class="
+            my-6
+            h-px
+            bg-gray-200
+            dark:bg-gray-800
+          "
+        ></div>
+
+
+
+        <!-- =================================================
+             AVAILABLE COLORS
+        ================================================== -->
+
+        @if (
+          selectedProduct()!.colors &&
+          selectedProduct()!.colors!.length
+        ) {
+
+          <div>
+
+            <div
+              class="
+                flex
+                items-center
+                justify-between
+              "
+            >
+
+              <h2
+                class="
+                  text-sm
+                  font-bold
+                  text-gray-900
+                  dark:text-white
+                "
+              >
+                Available Colors
+              </h2>
+
+              <span
+                class="
+                  text-xs
+                  text-gray-500
+                  dark:text-gray-400
+                "
+              >
+                {{ selectedProduct()!.colors!.length }} options
+              </span>
+
+            </div>
+
+
+            <div
+              class="
+                mt-4
+                grid
+                grid-cols-2
+                gap-2
+                sm:grid-cols-3
+              "
+            >
+
+              @for (
+                color of selectedProduct()!.colors!;
+                track color.slug
+              ) {
+
+                <a
+                  [routerLink]="[
+                    '/categories',
+                    selectedCategory()!.slug,
+                    color.slug
+                  ]"
+
+                  class="
+                    group/color
+                    flex
+                    items-center
+                    gap-2
+                    rounded-xl
+                    border
+                    border-gray-200
+                    bg-gray-50
+                    px-3
+                    py-2.5
+                    transition-all
+                    duration-200
+                    hover:border-brand-400
+                    hover:bg-brand-50
+                    hover:shadow-sm
+                    dark:border-gray-700
+                    dark:bg-gray-800
+                    dark:hover:border-brand-500
+                    dark:hover:bg-brand-950/30
+                  "
+                >
+
+                  <div
+                    class="
+                      h-8
+                      w-8
+                      shrink-0
+                      overflow-hidden
+                      rounded-lg
+                      border
+                      border-gray-200
+                      bg-white
+                      dark:border-gray-700
+                      dark:bg-gray-900
+                    "
+                  >
+
+                    <img
+                      [src]="color.image"
+                      [alt]="color.name"
+                      class="
+                        h-full
+                        w-full
+                        object-cover
+                      "
+                    />
+
+                  </div>
+
+                  <span
+                    class="
+                      truncate
+                      text-xs
+                      font-semibold
+                      text-gray-700
+                      group-hover/color:text-brand-600
+                      dark:text-gray-300
+                      dark:group-hover/color:text-brand-400
+                    "
+                  >
+                    {{ color.name }}
+                  </span>
+
+                </a>
+
+              }
+
+            </div>
+
+          </div>
+
+        }
+
+
+
+        <!-- =================================================
+             DIMENSIONS
+        ================================================== -->
+
+        @if (
+          selectedProduct()!.dimensions &&
+          selectedProduct()!.dimensions!.length
+        ) {
+
+          <div class="mt-7">
+
+            <div
+              class="
+                mb-3
+                flex
+                items-center
+                gap-2
+              "
+            >
+
+              <div
+                class="
+                  flex
+                  h-8
+                  w-8
+                  items-center
+                  justify-center
+                  rounded-lg
+                  bg-brand-50
+                  text-brand-600
+                  dark:bg-brand-950/50
+                  dark:text-brand-400
+                "
+              >
+
+                <mat-icon
+                  class="
+                    !m-0
+                    !text-[18px]
+                  "
+                  aria-hidden="true"
+                >
+                  straighten
+                </mat-icon>
+
+              </div>
+
+              <h2
+                class="
+                  text-sm
+                  font-bold
+                  text-gray-900
+                  dark:text-white
+                "
+              >
+                Product Dimensions
+              </h2>
+
+            </div>
+
+
+            <div
+              class="
+                overflow-hidden
+                rounded-xl
+                border
+                border-gray-200
+                dark:border-gray-700
+              "
+            >
+
+              @for (
+                dimension of selectedProduct()!.dimensions!;
+                track dimension.label
+              ) {
+
+                <div
+                  class="
+                    flex
+                    items-center
+                    justify-between
+                    gap-4
+                    border-b
+                    border-gray-100
+                    px-4
+                    py-3
+                    last:border-b-0
+                    dark:border-gray-800
+                  "
+                >
+
+                  <span
+                    class="
+                      text-xs
+                      text-gray-500
+                      dark:text-gray-400
+                    "
+                  >
+                    {{ dimension.label }}
+                  </span>
+
+                  <span
+                    class="
+                      text-xs
+                      font-bold
+                      text-gray-900
+                      dark:text-white
+                    "
+                  >
+                    {{ dimension.value }}
+                  </span>
+
+                </div>
+
+              }
+
+            </div>
+
+          </div>
+
+        }
+
+
+
+        <!-- =================================================
+             ACTION BUTTONS
+        ================================================== -->
+
+        <div
+          class="
+            mt-8
+            grid
+            gap-3
+            sm:grid-cols-2
+          "
+        >
+
+          <a
+            routerLink="/contact"
+
+            class="
+              group
+              inline-flex
+              items-center
+              justify-center
+              gap-2
+              rounded-xl
+              bg-brand-600
+              px-5
+              py-3.5
+              text-sm
+              font-bold
+              text-white
+              shadow-lg
+              shadow-brand-600/20
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+              hover:bg-brand-700
+              hover:shadow-xl
+              hover:shadow-brand-600/30
+            "
+          >
+
+            <mat-icon
+              class="
+                !m-0
+                !text-[19px]
+              "
+              aria-hidden="true"
+            >
+              mail_outline
+            </mat-icon>
+
+            Send Enquiry
+
+            <mat-icon
+              class="
+                !m-0
+                !text-[17px]
+                transition-transform
+                duration-300
+                group-hover:translate-x-1
+              "
+              aria-hidden="true"
+            >
+              arrow_forward
+            </mat-icon>
+
+          </a>
+
+
+          <a
+            href="tel:+918178460874"
+
+            class="
+              inline-flex
+              items-center
+              justify-center
+              gap-2
+              rounded-xl
+              border
+              border-gray-200
+              bg-white
+              px-5
+              py-3.5
+              text-sm
+              font-bold
+              text-gray-700
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+              hover:border-brand-300
+              hover:text-brand-600
+              hover:shadow-md
+              dark:border-gray-700
+              dark:bg-gray-800
+              dark:text-gray-300
+              dark:hover:border-brand-500
+              dark:hover:text-brand-400
+            "
+          >
+
+            <mat-icon
+              class="
+                !m-0
+                !text-[18px]
+              "
+              aria-hidden="true"
+            >
+              call
+            </mat-icon>
+
+            Call Us
+
+          </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TRUST INFORMATION
+        ================================================== -->
+
+        <div
+          class="
+            mt-6
+            grid
+            grid-cols-3
+            divide-x
+            divide-gray-200
+            rounded-xl
+            border
+            border-gray-100
+            bg-gray-50
+            py-3
+            dark:divide-gray-700
+            dark:border-gray-800
+            dark:bg-gray-800/60
+          "
+        >
+
+          <div class="px-2 text-center">
+
+            <mat-icon
+              class="
+                !m-0
+                !h-5
+                !w-5
+                !text-[18px]
+                text-brand-600
+                dark:text-brand-400
+              "
+              aria-hidden="true"
+            >
+              verified
+            </mat-icon>
+
+            <p
+              class="
+                mt-1
+                text-[10px]
+                font-medium
+                text-gray-500
+                dark:text-gray-400
+              "
+            >
+              Quality
+            </p>
+
+          </div>
+
+
+          <div class="px-2 text-center">
+
+            <mat-icon
+              class="
+                !m-0
+                !h-5
+                !w-5
+                !text-[18px]
+                text-brand-600
+                dark:text-brand-400
+              "
+              aria-hidden="true"
+            >
+              design_services
+            </mat-icon>
+
+            <p
+              class="
+                mt-1
+                text-[10px]
+                font-medium
+                text-gray-500
+                dark:text-gray-400
+              "
+            >
+              Premium Design
+            </p>
+
+          </div>
+
+
+          <div class="px-2 text-center">
+
+            <mat-icon
+              class="
+                !m-0
+                !h-5
+                !w-5
+                !text-[18px]
+                text-brand-600
+                dark:text-brand-400
+              "
+              aria-hidden="true"
+            >
+              support_agent
+            </mat-icon>
+
+            <p
+              class="
+                mt-1
+                text-[10px]
+                font-medium
+                text-gray-500
+                dark:text-gray-400
+              "
+            >
+              Support
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       PRODUCT INTRODUCTION
+  ====================================================== -->
+
+  @if (selectedProduct()!.introduction) {
+
+    <section
+      class="
+        mt-14
+        border-y
+        border-gray-200
+        bg-gradient-to-br
+        from-brand-50
+        via-white
+        to-gray-50
+        py-14
+        dark:border-gray-800
+        dark:from-gray-900
+        dark:via-gray-950
+        dark:to-gray-900
+        sm:mt-16
+        sm:py-16
+      "
+    >
+
+      <div
+        class="
+          mx-auto
+          max-w-4xl
+          px-4
+          text-center
+          sm:px-6
+          lg:px-8
+        "
+      >
+
+        <div
+          class="
+            mx-auto
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-2xl
+            bg-brand-100
+            text-brand-600
+            shadow-sm
+            dark:bg-brand-950/50
+            dark:text-brand-400
+          "
+        >
+
+          <mat-icon
+            class="!m-0"
+            aria-hidden="true"
+          >
+            auto_awesome
+          </mat-icon>
+
+        </div>
+
+
+        <p
+          class="
+            mt-5
+            text-xs
+            font-bold
+            uppercase
+            tracking-[0.25em]
+            text-brand-600
+            dark:text-brand-400
+          "
+        >
+          Product Introduction
+        </p>
+
+
+        <h2
+          class="
+            mt-3
+            text-2xl
+            font-extrabold
+            tracking-tight
+            text-gray-900
+            dark:text-white
+            sm:text-3xl
+          "
+        >
+          {{ selectedProduct()!.introductionTitle }}
+        </h2>
+
+
+        <p
+          class="
+            mt-5
+            text-sm
+            leading-8
+            text-gray-600
+            dark:text-gray-400
+            sm:text-base
+          "
+        >
+          {{ selectedProduct()!.introduction }}
+        </p>
+
+      </div>
+
+    </section>
+
+  }
+
+
+
+  <!-- =====================================================
+       FEATURES
+  ====================================================== -->
+
+  @if (
+    selectedProduct()!.features &&
+    selectedProduct()!.features!.length
+  ) {
+
+    <section
+      class="
+        bg-white
+        py-14
+        dark:bg-gray-950
+        sm:py-16
+      "
+    >
+
+      <div
+        class="
+          mx-auto
+          max-w-7xl
+          px-4
+          sm:px-6
+          lg:px-8
+        "
+      >
+
+        <!-- Section heading -->
+
+        <div class="max-w-2xl">
+
+          <p
+            class="
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.25em]
+              text-brand-600
+              dark:text-brand-400
+            "
+          >
+            Why You'll Love It
+          </p>
+
+          <h2
+            class="
+              mt-2
+              text-2xl
+              font-extrabold
+              tracking-tight
+              text-gray-900
+              dark:text-white
+              sm:text-3xl
+            "
+          >
+            Designed for everyday elegance
+          </h2>
+
+        </div>
+
+
+        <!-- Feature cards -->
+
+        <div
+          class="
+            mt-8
+            grid
+            gap-4
+            sm:grid-cols-2
+            lg:grid-cols-3
+          "
+        >
+
+          @for (
+            feature of selectedProduct()!.features!;
+            track feature;
+            let i = $index
+          ) {
+
+            <div
+              class="
+                group
+                rounded-2xl
+                border
+                border-gray-200
+                bg-gradient-to-br
+                from-white
+                to-gray-50
+                p-5
+                shadow-sm
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:border-brand-200
+                hover:shadow-lg
+                dark:border-gray-800
+                dark:from-gray-900
+                dark:to-gray-800
+                dark:hover:border-brand-900
+              "
+            >
+
+              <div
+                class="
+                  flex
+                  items-center
+                  gap-4
+                "
+              >
+
+                <div
+                  class="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-brand-50
+                    text-brand-600
+                    transition-transform
+                    duration-300
+                    group-hover:scale-110
+                    dark:bg-brand-950/50
+                    dark:text-brand-400
+                  "
+                >
+
+                  <mat-icon
+                    class="!m-0"
+                    aria-hidden="true"
+                  >
+                    check_circle
+                  </mat-icon>
+
+                </div>
+
+
+                <div>
+
+                  <span
+                    class="
+                      text-[10px]
+                      font-bold
+                      uppercase
+                      tracking-wider
+                      text-gray-400
+                    "
+                  >
+                    Feature {{ i + 1 }}
+                  </span>
+
+                  <p
+                    class="
+                      mt-1
+                      text-sm
+                      font-semibold
+                      leading-6
+                      text-gray-700
+                      dark:text-gray-300
+                    "
+                  >
+                    {{ feature }}
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+
+
+  <!-- =====================================================
+       MATERIAL & BUILD QUALITY
+  ====================================================== -->
+
+  @if (selectedProduct()!.materialDescription) {
+
+    <section
+      class="
+        bg-gray-50
+        py-14
+        dark:bg-gray-900/50
+        sm:py-16
+      "
+    >
+
+      <div
+        class="
+          mx-auto
+          max-w-7xl
+          px-4
+          sm:px-6
+          lg:px-8
+        "
+      >
+
+        <div
+          class="
+            grid
+            items-center
+            gap-8
+            lg:grid-cols-[0.8fr_1.2fr]
+            lg:gap-16
+          "
+        >
+
+          <!-- Heading card -->
+
+          <div
+            class="
+              rounded-3xl
+              bg-gradient-to-br
+              from-brand-600
+              via-brand-600
+              to-brand-800
+              p-7
+              text-white
+              shadow-xl
+              shadow-brand-600/20
+              sm:p-9
+            "
+          >
+
+            <div
+              class="
+                flex
+                h-12
+                w-12
+                items-center
+                justify-center
+                rounded-2xl
+                bg-white/15
+                ring-1
+                ring-white/20
+              "
+            >
+
+              <mat-icon
+                class="!m-0"
+                aria-hidden="true"
+              >
+                diamond
+              </mat-icon>
+
+            </div>
+
+
+            <p
+              class="
+                mt-6
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.25em]
+                text-white/70
+              "
+            >
+              Built to Last
+            </p>
+
+
+            <h2
+              class="
+                mt-2
+                text-2xl
+                font-extrabold
+                sm:text-3xl
+              "
+            >
+              {{ selectedProduct()!.materialTitle }}
+            </h2>
+
+
+            <div
+              class="
+                mt-6
+                h-1
+                w-16
+                rounded-full
+                bg-white/50
+              "
+            ></div>
+
+          </div>
+
+
+          <!-- Description card -->
+
+          <div
+            class="
+              rounded-3xl
+              border
+              border-gray-200
+              bg-white
+              p-7
+              shadow-sm
+              dark:border-gray-800
+              dark:bg-gray-900
+              sm:p-9
+            "
+          >
+
+            <div
+              class="
+                flex
+                gap-4
+              "
+            >
+
+              <div
+                class="
+                  hidden
+                  h-10
+                  w-1
+                  shrink-0
+                  rounded-full
+                  bg-brand-500
+                  sm:block
+                "
+              ></div>
+
+              <p
+                class="
+                  text-sm
+                  leading-8
+                  text-gray-600
+                  dark:text-gray-400
+                  sm:text-base
+                "
+              >
+                {{ selectedProduct()!.materialDescription }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+}
+
+
+
+<!-- =====================================================
+     PRODUCT NOT FOUND
+====================================================== -->
+
+@if (!selectedProduct()) {
+
+  <div
+    class="
+      mx-auto
+      flex
+      min-h-[60vh]
+      w-full
+      max-w-md
+      items-center
+      justify-center
+      px-4
+      py-16
+    "
+  >
+
+    <div
+      class="
+        w-full
+        rounded-3xl
+        border
+        border-gray-200
+        bg-white
+        p-8
+        text-center
+        shadow-lg
+        dark:border-gray-800
+        dark:bg-gray-900
+      "
+    >
+
+      <div
+        class="
+          mx-auto
+          flex
+          h-20
+          w-20
+          items-center
+          justify-center
+          rounded-full
+          bg-gray-100
+          text-gray-400
+          dark:bg-gray-800
+        "
+      >
+
+        <mat-icon
+          class="
+            !m-0
+            !h-10
+            !w-10
+            !text-[40px]
+          "
+          aria-hidden="true"
+        >
+          search_off
+        </mat-icon>
+
+      </div>
+
+
+      <h1
+        class="
+          mt-6
+          text-2xl
+          font-extrabold
+          text-gray-900
+          dark:text-white
+        "
+      >
+        Product Not Found
+      </h1>
+
+
+      <p
+        class="
+          mt-2
+          text-sm
+          leading-6
+          text-gray-500
+          dark:text-gray-400
+        "
+      >
+        The requested product could not be found.
+        Please return to the product collection.
+      </p>
+
+
+      <div class="mt-6">
+
+        <app-back-button
+          label="Go Back"
+        />
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

@@ -1,0 +1,115 @@
+<div class="page-header">
+  <div>
+    <h1>Inquiries</h1>
+    <p class="text-muted">Track and manage incoming customer inquiries through the sales pipeline.</p>
+  </div>
+  <button class="btn-primary" (click)="openCreate()">+ New Inquiry</button>
+</div>
+
+<div class="toolbar">
+  <input
+    type="search"
+    placeholder="Search by subject or customer…"
+    [(ngModel)]="search"
+    (ngModelChange)="onFilterChange()"
+    class="search-input"
+  />
+  <select [(ngModel)]="statusFilter" (ngModelChange)="onFilterChange()">
+    <option value="">All statuses</option>
+    @for (s of statuses; track s) {
+      <option [value]="s">{{ formatStatus(s) }}</option>
+    }
+  </select>
+  <select [(ngModel)]="priorityFilter" (ngModelChange)="onFilterChange()">
+    <option value="">All priorities</option>
+    @for (p of priorities; track p) {
+      <option [value]="p">{{ p }}</option>
+    }
+  </select>
+</div>
+
+<div class="table-card">
+  @if (loading()) {
+    <div class="empty-state">Loading…</div>
+  } @else if (inquiries().length === 0) {
+    <div class="empty-state">No inquiries found.</div>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Customer</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Assigned To</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (inquiry of inquiries(); track inquiry.id) {
+          <tr>
+            <td>
+              <strong>{{ inquiry.subject }}</strong>
+              @if (inquiry.product_name) {
+                <div class="text-faint" style="font-size: var(--fs-xs); margin-top: 2px;">{{ inquiry.product_name }}</div>
+              }
+            </td>
+            <td class="text-muted">{{ inquiry.customer_name }}</td>
+            <td>
+              <select
+                class="inline-select"
+                [class]="'priority-' + inquiry.priority"
+                [ngModel]="inquiry.priority"
+                (ngModelChange)="changePriority(inquiry, $event)"
+              >
+                @for (p of priorities; track p) {
+                  <option [value]="p">{{ p }}</option>
+                }
+              </select>
+            </td>
+            <td>
+              <select
+                class="inline-select"
+                [class]="'badge-' + inquiry.status"
+                [ngModel]="inquiry.status"
+                (ngModelChange)="changeStatus(inquiry, $event)"
+              >
+                @for (s of statuses; track s) {
+                  <option [value]="s">{{ formatStatus(s) }}</option>
+                }
+              </select>
+            </td>
+            <td>
+              <select
+                class="inline-select"
+                [ngModel]="inquiry.assigned_to ?? ''"
+                (ngModelChange)="changeAssignee(inquiry, $event)"
+              >
+                <option value="" disabled>{{ inquiry.assigned_to_name || 'Unassigned' }}</option>
+                @for (rep of salesReps(); track rep.id) {
+                  <option [value]="rep.id">{{ rep.name }}</option>
+                }
+              </select>
+            </td>
+            <td class="actions-cell">
+              <button class="btn-danger-text" (click)="remove(inquiry)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <span class="text-muted" style="font-size: var(--fs-xs);">{{ total() }} total</span>
+      <div class="pagination-controls">
+        <button class="btn-ghost btn-sm" [disabled]="page() <= 1" (click)="goToPage(page() - 1)">Prev</button>
+        <span class="text-muted" style="font-size: var(--fs-xs);">Page {{ page() }} of {{ totalPages }}</span>
+        <button class="btn-ghost btn-sm" [disabled]="page() >= totalPages" (click)="goToPage(page() + 1)">Next</button>
+      </div>
+    </div>
+  }
+</div>
+
+@if (showForm) {
+  <app-inquiry-form (close)="closeForm()" (saved)="onSaved()" />
+}

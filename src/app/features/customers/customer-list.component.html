@@ -1,0 +1,92 @@
+<div class="page-header">
+  <div>
+    <h1>Customers</h1>
+    <p class="text-muted">Manage customer contacts, their companies, and assigned sales reps.</p>
+  </div>
+  <button class="btn-primary" (click)="openCreate()">+ New Customer</button>
+</div>
+
+<div class="toolbar">
+  <input
+    type="search"
+    placeholder="Search by name or email…"
+    [(ngModel)]="search"
+    (ngModelChange)="onFilterChange()"
+    class="search-input"
+  />
+  <select [(ngModel)]="companyFilter" (ngModelChange)="onFilterChange()">
+    <option value="">All companies</option>
+    @for (c of companies(); track c.id) {
+      <option [value]="c.id">{{ c.company_name }}</option>
+    }
+  </select>
+  <select [(ngModel)]="statusFilter" (ngModelChange)="onFilterChange()">
+    <option value="">All statuses</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+  </select>
+</div>
+
+<div class="table-card">
+  @if (loading()) {
+    <div class="empty-state">Loading…</div>
+  } @else if (customers().length === 0) {
+    <div class="empty-state">No customers found.</div>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Company</th>
+          <th>Assigned To</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (customer of customers(); track customer.id) {
+          <tr>
+            <td>
+              <strong>{{ customer.name }}</strong>
+              @if (customer.designation) {
+                <div class="text-faint" style="font-size: var(--fs-xs); margin-top: 2px;">{{ customer.designation }}</div>
+              }
+            </td>
+            <td class="text-muted">{{ customer.email }}</td>
+            <td class="text-muted">{{ customer.company_name || '—' }}</td>
+            <td class="text-muted">{{ customer.assigned_to_name || 'Unassigned' }}</td>
+            <td>
+              <button
+                class="status-badge"
+                [class.status-active]="customer.status === 'active'"
+                [class.status-inactive]="customer.status === 'inactive'"
+                (click)="toggleStatus(customer)"
+                title="Click to toggle"
+              >
+                {{ customer.status }}
+              </button>
+            </td>
+            <td class="actions-cell">
+              <button class="btn-ghost btn-sm" (click)="openEdit(customer)">Edit</button>
+              <button class="btn-danger-text" (click)="remove(customer)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <span class="text-muted" style="font-size: var(--fs-xs);">{{ total() }} total</span>
+      <div class="pagination-controls">
+        <button class="btn-ghost btn-sm" [disabled]="page() <= 1" (click)="goToPage(page() - 1)">Prev</button>
+        <span class="text-muted" style="font-size: var(--fs-xs);">Page {{ page() }} of {{ totalPages }}</span>
+        <button class="btn-ghost btn-sm" [disabled]="page() >= totalPages" (click)="goToPage(page() + 1)">Next</button>
+      </div>
+    </div>
+  }
+</div>
+
+@if (showForm) {
+  <app-customer-form [editing]="editingCustomer" (close)="closeForm()" (saved)="onSaved()" />
+}
