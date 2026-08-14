@@ -55,15 +55,19 @@
     <main class="content">
       <!-- <router-outlet /> -->
       <div class="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-200">
-        <app-header></app-header>
+        @if (!auth.user()) {
+          <app-header></app-header>
+        }
 
         <main class="flex-1">
           <router-outlet></router-outlet>
         </main>
 
-        <app-footer></app-footer>
-        <app-scroll-to-top></app-scroll-to-top>
-        <app-whatsapp-button></app-whatsapp-button>
+        @if (!auth.user()) {
+          <app-footer></app-footer>
+          <app-scroll-to-top></app-scroll-to-top>
+          <app-whatsapp-button></app-whatsapp-button>
+        }
       </div>
 
     </main>

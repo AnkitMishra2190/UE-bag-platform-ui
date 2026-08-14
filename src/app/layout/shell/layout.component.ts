@@ -5,6 +5,8 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { ScrollToTopComponent } from '../scroll-to-top/scroll-to-top.component';
 import { WhatsAppButtonComponent } from '../whatsapp-button/whatsapp-button.component';
+import { AuthService } from '../../core/services/auth.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-layout',
@@ -18,16 +20,22 @@ import { WhatsAppButtonComponent } from '../whatsapp-button/whatsapp-button.comp
   ],
   template: `
     <div class="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-200">
-      <app-header></app-header>
+      @if (!auth.user()) {
+        <app-header></app-header>
+      }
 
       <main class="flex-1">
         <router-outlet></router-outlet>
       </main>
 
-      <app-footer></app-footer>
-      <app-scroll-to-top></app-scroll-to-top>
-      <app-whatsapp-button></app-whatsapp-button>
+      @if (!auth.user()) {
+        <app-footer></app-footer>
+        <app-scroll-to-top></app-scroll-to-top>
+        <app-whatsapp-button></app-whatsapp-button>
+      }
     </div>
   `,
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+  constructor(public auth: AuthService, public theme: ThemeService) {}
+}
