@@ -383,12 +383,12 @@ export const CATEGORIES: ProductCategory[] = [
       {
         name: 'FE',
         slug: 'fe',
-        image: 'https://placehold.co/600x600?text=FE+Partywear+Handbag',
+        image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=600&q=80',
         description: 'FE Partywear Handbag',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'FE Black', slug: 'fe-black', image: 'https://placehold.co/600x600?text=FE+Black' },
-          { name: 'FE Silver', slug: 'fe-silver', image: 'https://placehold.co/600x600?text=FE+Silver' }
+          { name: 'FE Black', slug: 'fe-black', image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=600&q=80' },
+          { name: 'FE Silver', slug: 'fe-silver', image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '25 cm' },
@@ -407,18 +407,18 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Designed using quality synthetic materials with carefully finished details.',
         gallery: [
-          'https://placehold.co/600x600?text=FE+Partywear+Handbag',
-          'https://placehold.co/600x600?text=FE+Side+View'
+          'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=600&q=80',
+          'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80'
         ]
       },
       {
         name: 'OD',
         slug: 'od',
-        image: 'https://placehold.co/600x600?text=OD+Partywear+Handbag',
+        image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600&q=80',
         description: 'OD Partywear Handbag',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'OD Gold', slug: 'od-gold', image: 'https://placehold.co/600x600?text=OD+Gold' }
+          { name: 'OD Gold', slug: 'od-gold', image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '26 cm' },
@@ -437,19 +437,19 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Made using durable synthetic material with quality finishing and carefully constructed details.',
         gallery: [
-          'https://placehold.co/600x600?text=OD+Partywear+Handbag',
-          'https://placehold.co/600x600?text=OD+Interior'
+          'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600&q=80',
+          'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80'
         ]
       },
       {
         name: 'LF',
         slug: 'lf',
-        image: 'https://placehold.co/600x600?text=LF+Partywear+Handbag',
+        image: 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&q=80',
         description: 'LF Partywear Handbag',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'LF Rose Gold', slug: 'lf-rose-gold', image: 'https://placehold.co/600x600?text=LF+Rose+Gold' },
-          { name: 'LF Midnight Blue', slug: 'lf-midnight-blue', image: 'https://placehold.co/600x600?text=LF+Midnight+Blue' }
+          { name: 'LF Rose Gold', slug: 'lf-rose-gold', image: 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&q=80' },
+          { name: 'LF Midnight Blue', slug: 'lf-midnight-blue', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '25 cm' },
@@ -468,18 +468,18 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Constructed using quality synthetic materials and durable hardware.',
         gallery: [
-          'https://placehold.co/600x600?text=LF+Partywear+Handbag',
-          'https://placehold.co/600x600?text=LF+Back+View'
+          'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&q=80',
+          'https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&q=80'
         ]
       },
       {
         name: 'MH',
         slug: 'mh',
-        image: 'https://placehold.co/600x600?text=MH+Partywear+Handbag',
+        image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=600&q=80',
         description: 'MH Partywear Handbag',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'MH Bronze', slug: 'mh-bronze', image: 'https://placehold.co/600x600?text=MH+Bronze' }
+          { name: 'MH Bronze', slug: 'mh-bronze', image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '25 cm' },
@@ -498,19 +498,19 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Made from quality synthetic materials with durable finishing.',
         gallery: [
-          'https://placehold.co/600x600?text=MH+Partywear+Handbag',
-          'https://placehold.co/600x600?text=MH+Detail'
+          'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=600&q=80',
+          'https://images.unsplash.com/photo-1590739225287-bd26de30528c?w=600&q=80'
         ]
       },
       {
         name: '8K',
         slug: '8k',
-        image: 'https://placehold.co/600x600?text=8K+Partywear+Handbag',
+        image: 'https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=600&q=80',
         description: '8K Partywear Handbag',
         brand: 'Unick Enterprises',
         colors: [
-          { name: '8K Champagne', slug: '8k-champagne', image: 'https://placehold.co/600x600?text=8K+Champagne' },
-          { name: '8K Pearl White', slug: '8k-pearl-white', image: 'https://placehold.co/600x600?text=8K+Pearl+White' }
+          { name: '8K Champagne', slug: '8k-champagne', image: 'https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=600&q=80' },
+          { name: '8K Pearl White', slug: '8k-pearl-white', image: 'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '24 cm' },
@@ -529,8 +529,8 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Designed with durable synthetic materials and quality finishing.',
         gallery: [
-          'https://placehold.co/600x600?text=8K+Partywear+Handbag',
-          'https://placehold.co/600x600?text=8K+Strap'
+          'https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=600&q=80',
+          'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=600&q=80'
         ]
       }
     ]
@@ -547,12 +547,12 @@ export const CATEGORIES: ProductCategory[] = [
       {
         name: 'Croco Sling',
         slug: 'croco-sling',
-        image: 'https://placehold.co/600x600?text=Croco+Sling',
+        image: 'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=600&q=80',
         description: 'A fashionable crocodile-inspired sling bag designed for convenient everyday carrying.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'Croco Sling Black', slug: 'croco-sling-black', image: 'https://placehold.co/600x600?text=Croco+Sling+Black' },
-          { name: 'Croco Sling Brown', slug: 'croco-sling-brown', image: 'https://placehold.co/600x600?text=Croco+Sling+Brown' }
+          { name: 'Croco Sling Black', slug: 'croco-sling-black', image: 'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=600&q=80' },
+          { name: 'Croco Sling Brown', slug: 'croco-sling-brown', image: 'https://images.unsplash.com/photo-1614179689702-355944cd0918?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '24 cm' },
@@ -572,19 +572,19 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Made from durable synthetic material with quality stitching and reliable hardware.',
         gallery: [
-          'https://placehold.co/600x600?text=Croco+Sling+Front',
-          'https://placehold.co/600x600?text=Croco+Sling+Back'
+          'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=600&q=80',
+          'https://images.unsplash.com/photo-1614179689702-355944cd0918?w=600&q=80'
         ]
       },
       {
         name: 'TCS',
         slug: 'tcs',
-        image: 'https://placehold.co/600x600?text=TCS+Sling',
+        image: 'https://images.unsplash.com/photo-1521223830114-4eb9dc1977e5?w=600&q=80',
         description: 'A practical TCS sling bag designed for convenient everyday carrying and modern styling.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'TCS Navy', slug: 'tcs-navy', image: 'https://placehold.co/600x600?text=TCS+Navy' },
-          { name: 'TCS Grey', slug: 'tcs-grey', image: 'https://placehold.co/600x600?text=TCS+Grey' }
+          { name: 'TCS Navy', slug: 'tcs-navy', image: 'https://images.unsplash.com/photo-1521223830114-4eb9dc1977e5?w=600&q=80' },
+          { name: 'TCS Grey', slug: 'tcs-grey', image: 'https://images.unsplash.com/photo-1581591524425-c7e0978865fc?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '23 cm' },
@@ -604,19 +604,19 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Constructed using durable synthetic material with reliable stitching and hardware.',
         gallery: [
-          'https://placehold.co/600x600?text=TCS+Front',
-          'https://placehold.co/600x600?text=TCS+Side'
+          'https://images.unsplash.com/photo-1521223830114-4eb9dc1977e5?w=600&q=80',
+          'https://images.unsplash.com/photo-1581591524425-c7e0978865fc?w=600&q=80'
         ]
       },
       {
         name: 'DVD',
         slug: 'dvd',
-        image: 'https://placehold.co/600x600?text=DVD+Sling',
+        image: 'https://images.unsplash.com/photo-1559564177-3e1898bd06ce?w=600&q=80',
         description: 'DVD is a stylish sling bag designed for convenient everyday use and modern fashion.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'DVD Red', slug: 'dvd-red', image: 'https://placehold.co/600x600?text=DVD+Red' },
-          { name: 'DVD Black', slug: 'dvd-black', image: 'https://placehold.co/600x600?text=DVD+Black' }
+          { name: 'DVD Red', slug: 'dvd-red', image: 'https://images.unsplash.com/photo-1559564177-3e1898bd06ce?w=600&q=80' },
+          { name: 'DVD Black', slug: 'dvd-black', image: 'https://images.unsplash.com/photo-1548883354-94cb22f03672?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '24 cm' },
@@ -636,19 +636,19 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Designed using durable synthetic materials with quality finishing.',
         gallery: [
-          'https://placehold.co/600x600?text=DVD+Front',
-          'https://placehold.co/600x600?text=DVD+Open'
+          'https://images.unsplash.com/photo-1559564177-3e1898bd06ce?w=600&q=80',
+          'https://images.unsplash.com/photo-1548883354-94cb22f03672?w=600&q=80'
         ]
       },
       {
         name: 'G-Embosse',
         slug: 'g-embosse',
-        image: 'https://placehold.co/600x600?text=G-Embosse',
+        image: 'https://images.unsplash.com/photo-1590736969955-71cc94801759?w=600&q=80',
         description: 'G-Embosse is a fashionable embossed sling bag designed for modern everyday lifestyles.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'Embosse Tan', slug: 'embosse-tan', image: 'https://placehold.co/600x600?text=Embosse+Tan' },
-          { name: 'Embosse Olive', slug: 'embosse-olive', image: 'https://placehold.co/600x600?text=Embosse+Olive' }
+          { name: 'Embosse Tan', slug: 'embosse-tan', image: 'https://images.unsplash.com/photo-1590736969955-71cc94801759?w=600&q=80' },
+          { name: 'Embosse Olive', slug: 'embosse-olive', image: 'https://images.unsplash.com/photo-1606522754091-a3bbf9ad4cb3?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '24 cm' },
@@ -668,19 +668,19 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Built using durable synthetic material with a detailed embossed finish.',
         gallery: [
-          'https://placehold.co/600x600?text=G-Embosse+Front',
-          'https://placehold.co/600x600?text=G-Embosse+Detail'
+          'https://images.unsplash.com/photo-1590736969955-71cc94801759?w=600&q=80',
+          'https://images.unsplash.com/photo-1606522754091-a3bbf9ad4cb3?w=600&q=80'
         ]
       },
       {
         name: 'VL',
         slug: 'vl',
-        image: 'https://placehold.co/600x600?text=VL+Sling',
+        image: 'https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?w=600&q=80',
         description: 'VL is a versatile sling bag designed for convenient daily carrying and contemporary styling.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'VL Classic', slug: 'vl-classic', image: 'https://placehold.co/600x600?text=VL+Classic' },
-          { name: 'VL Modern', slug: 'vl-modern', image: 'https://placehold.co/600x600?text=VL+Modern' }
+          { name: 'VL Classic', slug: 'vl-classic', image: 'https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?w=600&q=80' },
+          { name: 'VL Modern', slug: 'vl-modern', image: 'https://images.unsplash.com/photo-1631521741639-661dfed6e637?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '23 cm' },
@@ -700,19 +700,19 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Made using durable synthetic material and reliable hardware.',
         gallery: [
-          'https://placehold.co/600x600?text=VL+Front',
-          'https://placehold.co/600x600?text=VL+Strap'
+          'https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?w=600&q=80',
+          'https://images.unsplash.com/photo-1631521741639-661dfed6e637?w=600&q=80'
         ]
       },
       {
         name: 'ZE',
         slug: 'ze',
-        image: 'https://placehold.co/600x600?text=ZE+Sling',
+        image: 'https://images.unsplash.com/photo-1598532213005-5f9393eb53da?w=600&q=80',
         description: 'ZE is a stylish compact sling bag designed for convenient hands-free carrying.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'ZE Blue', slug: 'ze-blue', image: 'https://placehold.co/600x600?text=ZE+Blue' },
-          { name: 'ZE Pink', slug: 'ze-pink', image: 'https://placehold.co/600x600?text=ZE+Pink' }
+          { name: 'ZE Blue', slug: 'ze-blue', image: 'https://images.unsplash.com/photo-1598532213005-5f9393eb53da?w=600&q=80' },
+          { name: 'ZE Pink', slug: 'ze-pink', image: 'https://images.unsplash.com/photo-1591561954153-f72565615d18?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '24 cm' },
@@ -732,8 +732,8 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Constructed using durable synthetic material with carefully finished details.',
         gallery: [
-          'https://placehold.co/600x600?text=ZE+Front',
-          'https://placehold.co/600x600?text=ZE+Inside'
+          'https://images.unsplash.com/photo-1598532213005-5f9393eb53da?w=600&q=80',
+          'https://images.unsplash.com/photo-1591561954153-f72565615d18?w=600&q=80'
         ]
       }
     ]
@@ -750,12 +750,12 @@ export const CATEGORIES: ProductCategory[] = [
       {
         name: 'Bamboo',
         slug: 'bamboo',
-        image: 'https://placehold.co/600x600?text=Bamboo+Backpack',
+        image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80',
         description: 'Bamboo is a practical school bag designed for comfortable everyday student use.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'Bamboo Green', slug: 'bamboo-green', image: 'https://placehold.co/600x600?text=Bamboo+Green' },
-          { name: 'Bamboo Brown', slug: 'bamboo-brown', image: 'https://placehold.co/600x600?text=Bamboo+Brown' }
+          { name: 'Bamboo Green', slug: 'bamboo-green', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80' },
+          { name: 'Bamboo Brown', slug: 'bamboo-brown', image: 'https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '32 cm' },
@@ -763,30 +763,29 @@ export const CATEGORIES: ProductCategory[] = [
           { label: 'Height', value: '43 cm' }
         ],
         introductionTitle: 'Practical School Backpack',
-        introduction: 'Bamboo is designed to provide students with practical storage and comfortable carrying for everyday school requirements.',
+        introduction: 'Bamboo is designed to provide students with practical storage and comfortable carrying.',
         features: [
           'Spacious main compartment',
           'Comfortable shoulder straps',
           'Useful front storage',
-          'Durable construction',
           'Suitable for everyday school use'
         ],
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Designed using durable school-bag material with reinforced stitching and comfortable straps.',
         gallery: [
-          'https://placehold.co/600x600?text=Bamboo+Front',
-          'https://placehold.co/600x600?text=Bamboo+Side'
+          'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80',
+          'https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600&q=80'
         ]
       },
       {
         name: 'Barfi',
         slug: 'barfi',
-        image: 'https://placehold.co/600x600?text=Barfi+School+Bag',
+        image: 'https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=600&q=80',
         description: 'Barfi is a practical and durable school bag designed for everyday student requirements.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'Barfi Blue', slug: 'barfi-blue', image: 'https://placehold.co/600x600?text=Barfi+Blue' },
-          { name: 'Barfi Grey', slug: 'barfi-grey', image: 'https://placehold.co/600x600?text=Barfi+Grey' }
+          { name: 'Barfi Blue', slug: 'barfi-blue', image: 'https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=600&q=80' },
+          { name: 'Barfi Grey', slug: 'barfi-grey', image: 'https://images.unsplash.com/photo-1546938576-6e6a64f317cc?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '32 cm' },
@@ -799,25 +798,24 @@ export const CATEGORIES: ProductCategory[] = [
           'Spacious storage',
           'Comfortable straps',
           'Front pocket',
-          'Durable construction',
           'Student-friendly design'
         ],
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Made with durable materials and reinforced stitching for regular school use.',
         gallery: [
-          'https://placehold.co/600x600?text=Barfi+Front',
-          'https://placehold.co/600x600?text=Barfi+Open'
+          'https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=600&q=80',
+          'https://images.unsplash.com/photo-1546938576-6e6a64f317cc?w=600&q=80'
         ]
       },
       {
         name: 'Mazic',
         slug: 'mazic',
-        image: 'https://placehold.co/600x600?text=Mazic+Backpack',
+        image: 'https://images.unsplash.com/photo-1491336477066-31156b5e4f35?w=600&q=80',
         description: 'Mazic is a functional school backpack designed for students who need convenient everyday storage.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'Mazic Red', slug: 'mazic-red', image: 'https://placehold.co/600x600?text=Mazic+Red' },
-          { name: 'Mazic Black', slug: 'mazic-black', image: 'https://placehold.co/600x600?text=Mazic+Black' }
+          { name: 'Mazic Black', slug: 'mazic-black', image: 'https://images.unsplash.com/photo-1491336477066-31156b5e4f35?w=600&q=80' },
+          { name: 'Mazic Navy', slug: 'mazic-navy', image: 'https://images.unsplash.com/photo-1577733966973-d680bffd2e80?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '33 cm' },
@@ -836,19 +834,19 @@ export const CATEGORIES: ProductCategory[] = [
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Built using durable backpack material with reinforced seams and comfortable straps.',
         gallery: [
-          'https://placehold.co/600x600?text=Mazic+Front',
-          'https://placehold.co/600x600?text=Mazic+Back'
+          'https://images.unsplash.com/photo-1491336477066-31156b5e4f35?w=600&q=80',
+          'https://images.unsplash.com/photo-1577733966973-d680bffd2e80?w=600&q=80'
         ]
       },
       {
         name: 'RP Cord',
         slug: 'rp-cord',
-        image: 'https://placehold.co/600x600?text=RP+Cord+Bag',
+        image: 'https://images.unsplash.com/photo-1616781296068-183427210e7b?w=600&q=80',
         description: 'RP Cord is a durable school bag designed for convenient storage and everyday student use.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'RP Cord Navy', slug: 'rp-cord-navy', image: 'https://placehold.co/600x600?text=RP+Cord+Navy' },
-          { name: 'RP Cord Charcoal', slug: 'rp-cord-charcoal', image: 'https://placehold.co/600x600?text=RP+Cord+Charcoal' }
+          { name: 'RP Cord Denim', slug: 'rp-cord-denim', image: 'https://images.unsplash.com/photo-1616781296068-183427210e7b?w=600&q=80' },
+          { name: 'RP Cord Charcoal', slug: 'rp-cord-charcoal', image: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '32 cm' },
@@ -861,25 +859,24 @@ export const CATEGORIES: ProductCategory[] = [
           'Durable construction',
           'Spacious storage',
           'Comfortable straps',
-          'Practical compartments',
-          'Everyday school design'
+          'Practical compartments'
         ],
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Made using durable school-bag materials with reinforced stitching.',
         gallery: [
-          'https://placehold.co/600x600?text=RP+Cord+Front',
-          'https://placehold.co/600x600?text=RP+Cord+Detail'
+          'https://images.unsplash.com/photo-1616781296068-183427210e7b?w=600&q=80',
+          'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=600&q=80'
         ]
       },
       {
         name: 'PB',
         slug: 'pb',
-        image: 'https://placehold.co/600x600?text=PB+School+Bag',
+        image: 'https://images.unsplash.com/photo-1579758629938-16cce041e155?w=600&q=80',
         description: 'PB is a practical school backpack designed for students and everyday academic requirements.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'PB Blue', slug: 'pb-blue', image: 'https://placehold.co/600x600?text=PB+Blue' },
-          { name: 'PB Yellow', slug: 'pb-yellow', image: 'https://placehold.co/600x600?text=PB+Yellow' }
+          { name: 'PB Blue', slug: 'pb-blue', image: 'https://images.unsplash.com/photo-1579758629938-16cce041e155?w=600&q=80' },
+          { name: 'PB Yellow', slug: 'pb-yellow', image: 'https://images.unsplash.com/photo-1622560481432-8495031b99a6?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '32 cm' },
@@ -892,25 +889,24 @@ export const CATEGORIES: ProductCategory[] = [
           'Spacious interior',
           'Front storage',
           'Comfortable straps',
-          'Durable design',
-          'Suitable for daily school use'
+          'Durable design'
         ],
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Designed with durable materials and reinforced stitching for regular use.',
         gallery: [
-          'https://placehold.co/600x600?text=PB+Front',
-          'https://placehold.co/600x600?text=PB+Inside'
+          'https://images.unsplash.com/photo-1579758629938-16cce041e155?w=600&q=80',
+          'https://images.unsplash.com/photo-1622560481432-8495031b99a6?w=600&q=80'
         ]
       },
       {
         name: 'CB',
         slug: 'cb',
-        image: 'https://placehold.co/600x600?text=CB+Backpack',
+        image: 'https://images.unsplash.com/photo-1618012674987-a065c7117565?w=600&q=80',
         description: 'CB is a durable and practical school bag designed for comfortable everyday student use.',
         brand: 'Unick Enterprises',
         colors: [
-          { name: 'CB Teal', slug: 'cb-teal', image: 'https://placehold.co/600x600?text=CB+Teal' },
-          { name: 'CB Magenta', slug: 'cb-magenta', image: 'https://placehold.co/600x600?text=CB+Magenta' }
+          { name: 'CB Teal', slug: 'cb-teal', image: 'https://images.unsplash.com/photo-1618012674987-a065c7117565?w=600&q=80' },
+          { name: 'CB Magenta', slug: 'cb-magenta', image: 'https://images.unsplash.com/photo-1588824147778-9e5cde369d7a?w=600&q=80' }
         ],
         dimensions: [
           { label: 'Length', value: '33 cm' },
@@ -923,14 +919,13 @@ export const CATEGORIES: ProductCategory[] = [
           'Spacious compartments',
           'Comfortable shoulder straps',
           'Durable construction',
-          'Practical front pocket',
-          'Suitable for school use'
+          'Practical front pocket'
         ],
         materialTitle: 'Material and Build Quality',
         materialDescription: 'Constructed using durable backpack material with reinforced stitching and comfortable straps.',
         gallery: [
-          'https://placehold.co/600x600?text=CB+Front',
-          'https://placehold.co/600x600?text=CB+Strap'
+          'https://images.unsplash.com/photo-1618012674987-a065c7117565?w=600&q=80',
+          'https://images.unsplash.com/photo-1588824147778-9e5cde369d7a?w=600&q=80'
         ]
       }
     ]
