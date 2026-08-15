@@ -6,10 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { BackButtonComponent } from '../../../../shared/components/back-button/back-button.component';
 
 import {
-  ProductDataService,
+  ProductDataService
+} from '../../../services/product-data.service';
+
+import {
   ProductCategory,
   CategoryProduct
-} from '../../../../core/services/product-data.service';
+} from '../data/product-data';
 
 
 @Component({
@@ -41,11 +44,38 @@ export class ProductDetailsComponent implements OnInit {
   // SELECTED DATA
   // =====================================================
 
-  selectedCategory =
-    signal<ProductCategory | null>(null);
+  selectedCategory = signal<ProductCategory | null>(null);
 
-  selectedProduct =
-    signal<CategoryProduct | null>(null);
+  selectedProduct = signal<CategoryProduct | null>(null);
+
+  // =====================================================
+  // PRODUCT IMAGE ZOOM & GALLERY
+  // =====================================================
+
+  /**
+   * Currently selected main image.
+   * By default, use the product's primary image.
+   */
+  selectedImage = signal<string>('');
+  
+  /**
+   * Index of the currently selected image for gallery navigation.
+   */
+  selectedImageIndex = signal<number>(0);
+
+  /**
+   * Whether the mouse is currently over the main image.
+   */
+  isImageZoomed = false;
+
+  /**
+   * Zoom position.
+   *
+   * Example:
+   * 50% 50% = center of image
+   * 20% 70% = left/bottom area
+   */
+  zoomPosition = '50% 50%';
 
 
   // =====================================================
@@ -70,98 +100,62 @@ export class ProductDetailsComponent implements OnInit {
       // Get URL parameters
       // -------------------------------------------------
 
-      this.categorySlug =
-        params.get('category') ?? '';
+      this.categorySlug = params.get('category') ?? '';
+      this.productSlug = params.get('product') ?? '';
 
-      this.productSlug =
-        params.get('product') ?? '';
-
-
-      console.log(
-        'Category:',
-        this.categorySlug
-      );
-
-      console.log(
-        'Product:',
-        this.productSlug
-      );
-
+      console.log('Category:', this.categorySlug);
+      console.log('Product:', this.productSlug);
 
       // -------------------------------------------------
       // Get category + product
       // -------------------------------------------------
 
-      const result =
-        this.productDataService.getCategoryAndProduct(
-          this.categorySlug,
-          this.productSlug
-        );
+      const result = this.productDataService.getCategoryAndProduct(
+        this.categorySlug,
+        this.productSlug
+      );
 
+      // -------------------------------------------------
+      // Update signals
+      // -------------------------------------------------
 
-        // -------------------------------------------------
-        // Update signals
-        // -------------------------------------------------
+      this.selectedCategory.set(result.category);
+      this.selectedProduct.set(result.product);
 
-        this.selectedCategory.set(result.category);
+      // -------------------------------------------------
+      // Set first/main image
+      // -------------------------------------------------
 
-        this.selectedProduct.set(result.product);
-
-        // -------------------------------------------------
-        // Set first/main image
-        // -------------------------------------------------
-
-        if (result.product) {
+      if (result.product) {
         this.selectedImage.set(
-            result.product.gallery?.[0] ?? result.product.image
+          result.product.gallery?.[0] ?? result.product.image
         );
-        }
-
+        this.selectedImageIndex.set(0);
+      }
 
       // -------------------------------------------------
       // Debug
       // -------------------------------------------------
 
-      console.log(
-        'Selected Category:',
-        this.selectedCategory()
-      );
-
-      console.log(
-        'Selected Product:',
-        this.selectedProduct()
-      );
-
+      console.log('Selected Category:', this.selectedCategory());
+      console.log('Selected Product:', this.selectedProduct());
 
       // -------------------------------------------------
       // Category not found
       // -------------------------------------------------
 
       if (!result.category) {
-
-        console.error(
-          'Category not found:',
-          this.categorySlug
-        );
-
+        console.error('Category not found:', this.categorySlug);
         return;
-
       }
-
 
       // -------------------------------------------------
       // Product not found
       // -------------------------------------------------
 
       if (!result.product) {
-
-        console.error(
-          'Product not found:',
-          this.productSlug
-        );
-
+        console.error('Product not found:', this.productSlug);
         return;
-
       }
 
     });
@@ -170,85 +164,108 @@ export class ProductDetailsComponent implements OnInit {
 
 
   // =====================================================
-    // PRODUCT IMAGE ZOOM
-    // =====================================================
+  // IMAGE GALLERY NAVIGATION
+  // =====================================================
 
-    /**
-     * Currently selected main image.
-     * By default, use the product's primary image.
-     */
-    selectedImage = signal<string>('');
+  previousImage(): void {
+    const product = this.selectedProduct();
+    if (!product?.gallery?.length) return;
 
-    /**
-     * Whether the mouse is currently over the main image.
-     */
-    isImageZoomed = false;
+    let newIndex = this.selectedImageIndex() - 1;
+    if (newIndex < 0) {
+      newIndex = product.gallery.length - 1;
+    }
+    
+    this.goToImage(newIndex);
+  }
 
-    /**
-     * Zoom position.
-     *
-     * Example:
-     * 50% 50% = center of image
-     * 20% 70% = left/bottom area
-     */
-    zoomPosition = '50% 50%';
+  nextImage(): void {
+    const product = this.selectedProduct();
+    if (!product?.gallery?.length) return;
 
-    // =====================================================
-// IMAGE SELECTION
-// =====================================================
+    let newIndex = this.selectedImageIndex() + 1;
+    if (newIndex >= product.gallery.length) {
+      newIndex = 0;
+    }
+    
+    this.goToImage(newIndex);
+  }
 
-selectImage(image: string): void {
-  this.selectedImage.set(image);
+  goToImage(index: number): void {
+    const product = this.selectedProduct();
+    if (!product?.gallery?.length) return;
 
-  // Reset zoom when changing image
-  this.isImageZoomed = false;
-  this.zoomPosition = '50% 50%';
-}
-
-
-// =====================================================
-// IMAGE ZOOM - MOUSE ENTER
-// =====================================================
-
-onImageMouseEnter(): void {
-  // Zoom only when using a mouse.
-  this.isImageZoomed = true;
-}
+    if (index >= 0 && index < product.gallery.length) {
+      this.selectedImageIndex.set(index);
+      this.selectedImage.set(product.gallery[index]);
+      
+      // Reset zoom when changing image
+      this.isImageZoomed = false;
+      this.zoomPosition = '50% 50%';
+    }
+  }
 
 
-// =====================================================
-// IMAGE ZOOM - MOUSE LEAVE
-// =====================================================
+  // =====================================================
+  // IMAGE SELECTION (Thumbnails)
+  // =====================================================
 
-onImageMouseLeave(): void {
-  this.isImageZoomed = false;
+  selectImage(image: string): void {
+    this.selectedImage.set(image);
+    
+    const product = this.selectedProduct();
+    if (product?.gallery?.length) {
+      const index = product.gallery.indexOf(image);
+      if (index !== -1) {
+        this.selectedImageIndex.set(index);
+      }
+    }
 
-  // Return zoom position to center
-  this.zoomPosition = '50% 50%';
-}
-
-
-// =====================================================
-// IMAGE ZOOM - MOUSE MOVE
-// =====================================================
-
-onImageMouseMove(event: MouseEvent): void {
-
-  const container = event.currentTarget as HTMLElement;
-
-  const rect = container.getBoundingClientRect();
-
-  // Mouse position inside image container
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-
-  // Convert position to percentage
-  const xPercent = (x / rect.width) * 100;
-  const yPercent = (y / rect.height) * 100;
-
-  this.zoomPosition = `${xPercent}% ${yPercent}%`;
-}
+    // Reset zoom when changing image
+    this.isImageZoomed = false;
+    this.zoomPosition = '50% 50%';
+  }
 
 
+  // =====================================================
+  // IMAGE ZOOM - MOUSE ENTER
+  // =====================================================
+
+  onImageMouseEnter(): void {
+    // Zoom only when using a mouse.
+    this.isImageZoomed = true;
+  }
+
+
+  // =====================================================
+  // IMAGE ZOOM - MOUSE LEAVE
+  // =====================================================
+
+  onImageMouseLeave(): void {
+    this.isImageZoomed = false;
+
+    // Return zoom position to center
+    this.zoomPosition = '50% 50%';
+  }
+
+
+  // =====================================================
+  // IMAGE ZOOM - MOUSE MOVE
+  // =====================================================
+
+  onImageMouseMove(event: MouseEvent): void {
+    const container = event.currentTarget as HTMLElement;
+    const rect = container.getBoundingClientRect();
+
+    // Mouse position inside image container
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Convert position to percentage
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
+
+    this.zoomPosition = `${xPercent}% ${yPercent}%`;
+  }
 
 }

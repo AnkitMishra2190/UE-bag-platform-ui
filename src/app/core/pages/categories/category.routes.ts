@@ -1,43 +1,26 @@
 import { Routes } from '@angular/router';
 
+// Adjust these imports to match your exact file structure if necessary
+import { CategoriesComponent } from './categories.component';
+import { CategoryProductDetailsComponent } from './category-product-details/category-product-details.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+
 export const CATEGORY_ROUTES: Routes = [
-
-  // =====================================================
-  // CATEGORY LIST
-  // /categories
-  // =====================================================
-
   {
+    // Route for the main categories list (e.g., /categories)
     path: '',
-    loadComponent: () =>
-      import('./categories.component')
-        .then(m => m.CategoriesComponent)
+    component: CategoriesComponent,
+    title: 'Categories'
   },
-
-
-  // =====================================================
-  // CATEGORY PRODUCTS
-  // /categories/regular-handbags
-  // =====================================================
-
   {
+    // Route for a specific category (e.g., /categories/regular-handbags)
     path: ':category',
-    loadComponent: () =>
-      import('./category-product-details/category-product-details.component')
-        .then(m => m.CategoryProductDetailsComponent)
+    component: CategoryProductDetailsComponent
   },
-
-
-  // =====================================================
-  // PRODUCT DETAILS
-  // /categories/regular-handbags/croco-pocket-grey
-  // =====================================================
-
-//   {
-//     path: ':category/:product',
-//     loadComponent: () =>
-//       import('./product-details/product-details.component')
-//         .then(m => m.ProductDetailsComponent)
-//   }
-
+  {
+    // Route for a specific product within a category (e.g., /categories/regular-handbags/croco-pocket-grey)
+    // The parameters :category and :product MUST match what you are getting in ProductDetailsComponent
+    path: ':category/:product',
+    component: ProductDetailsComponent
+  }
 ];
